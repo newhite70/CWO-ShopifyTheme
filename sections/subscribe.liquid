@@ -1,0 +1,578 @@
+{%- if section.settings.subscribe_area_enable == true -%}
+<div class="{% unless section.settings.full_width %}container{% endunless %}">
+  <div data-section="SubascribeSection" class="subscribe-section position-relative fix {% if section.settings.snow_enable %}rel-area{%endif%}" id="section-{{ section.id }}">
+    {% if section.settings.banner_product_bg_image_enable %}
+    <div class="subscribe-bg-image"></div>
+    {% endif %}
+
+    {%- if section.settings.snow_enable -%}
+    <span class="effect-body ice_effect"></span>
+    {%- endif -%}
+    
+    {% if section.settings.subscribe_area_shape_1_enable == true %}
+    <div class="subscribe-shape rellax" data-rellax-speed="3" data-rellax-percentage="0.5">
+      <img class="lazyload" data-src="{{ section.settings.subscribe_area_shape_1 | img_url: 'large ' }}" alt="">
+    </div>
+    {% endif %}
+
+    <div class="{% if section.settings.full_width %}container{% endif %}">
+      <div class="row align-items-center">
+
+        {% if section.settings.banner_product_enable %}
+        <div class="col-lg-5 col-md-4 col-12 d-flex justify-content-end">
+          <a href="{{ section.settings.banner_product_url }}" class="subscribe-product rellax" data-rellax-speed="3" data-rellax-percentage="0.5">
+            {% if section.settings.banner_product_name != '' or section.settings.banner_product_brand != '' %}
+            <h1>{{ section.settings.banner_product_name }}<span>{{ section.settings.banner_product_brand }}</span></h1>
+            {% endif %}
+
+            {% if section.settings.banner_product_image != blank %}
+            <img class="lazyload" data-src="{{ section.settings.banner_product_image | img_url: 'large' }}" alt="{{ section.settings.banner_product_image.alt }}">
+            {% else %}
+            <img src="https://via.placeholder.com/216x356" alt="{{ section.settings.banner_product_image.alt }}">
+            {% endif %}
+          </a>
+        </div>
+        {% endif %}
+
+
+        <div class="{% if section.settings.banner_product_enable %}col-lg-7 col-md-8{% endif %} col-12">
+          <div class="subscribe-wrap">
+            {%- if section.settings.subscribe_sub_title != '' -%}
+            <h3>{{ section.settings.subscribe_sub_title }}</h3>
+            {%- endif -%}
+
+            {%- if section.settings.subscribe_title != '' -%}
+            <h1>{{ section.settings.subscribe_title }}</h1>
+            {%- endif -%}
+
+            {%- if section.settings.subscribe_brief != '' -%}
+            <p>{{ section.settings.subscribe_brief }}</p>
+            {%- endif -%}
+
+
+
+            {%- if settings.newsletter_system == 'by_shopify_form' -%}
+            {%- assign formId = 'Contact_' | append: section.id -%}
+            {%- form 'customer', id: formId, class: "subscribe-form-inner" -%}
+            {%- if form.posted_successfully? -%}
+            <p class="form-message form-message--success form-success">{{ 'general.newsletter_form.confirmation'| t }}</p>
+            <script>
+              var SuccessFormToggle = $('.success-form-close-btn');
+              SuccessFormToggle.on('click', function(){
+                $('.form-message--success').slideToggle();
+              })
+            </script>
+            {%- else -%}
+
+            {%- if form.errors -%}
+            <div class="form-message form-message--error">
+              {{ form.errors | default_errors }}
+            </div>
+            {%- endif -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input class="form-control subscribe-form" type="email" name="contact[email]" id="Email" value="{% if customer %}{{ customer.email }}{% endif %}"
+                   placeholder="{{ 'general.newsletter_form.newsletter_email'| t }}" aria-label="{{ 'general.newsletter_form.newsletter_email'| t }}" {% if form.errors %}aria-invalid="true"{% endif %} autocorrect="off" autocapitalize="off">
+            <button type="submit" class="newsletter-btn" name="commit" id="subscribe">{{ settings.newsletter_button_name }}</button>
+            {%- endif -%}
+            {%- endform -%}
+            {%- elsif settings.newsletter_system == 'by_mailchimp' -%}
+            <form action="{{ settings.newsletter_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="mc-form subscribe-form-inner validate" target="_blank" novalidate>
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="{{ section.settings.email_placeholder }}" required>
+              <button type="submit" name="subscribe" id="mc-embedded-subscribe">{{ section.settings.button_title }}</button>
+            </form>
+            {%- endif -%}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+{%- style -%}
+
+  .subscribe-bg-image {
+    background-image: url({{ section.settings.banner_product_bg_image | img_url: 'master' }});
+   }
+
+  #section-{{ section.id }} {
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+  
+  {% unless section.settings.banner_product_enable %}
+  .subscribe-wrap {
+    float: none;
+  }
+  {% endunless %}
+
+
+#section-{{ section.id }} .subscribe-product h1 {
+    color: {{ section.settings.banner_product_name_color }};
+}
+#section-{{ section.id }} .subscribe-product h1 span {
+    color: {{ section.settings.banner_product_brand_name_color }};
+}
+#section-{{ section.id }} .subscribe-wrap h3 {
+    color: {{ section.settings.subscribe_sub_title_color }};
+}
+#section-{{ section.id }} .subscribe-wrap h3 span {
+    color: {{ section.settings.subscribe_sub_title_span_color }};
+}
+#section-{{ section.id }} .subscribe-wrap h1 {
+    color: {{ section.settings.subscribe_title_color }};
+}
+#section-{{ section.id }} .subscribe-wrap p {
+    color: {{ section.settings.subscribe_brief_color }};
+}
+#section-{{ section.id }} .subscribe-form-inner input[type="email"] {
+    border-color: {{ section.settings.subscribe_form_input_border_color }};
+    background-color: {{ section.settings.subscribe_form_input_bg_color }};
+    color: {{ section.settings.subscribe_form_input_text_color }};
+    border-radius: {{ section.settings.subscribe_form_input_border_radius }}px;
+}
+
+#section-{{ section.id }} .subscribe-form-inner input[type="email"]::-webkit-input-placeholder {
+  color: {{ section.settings.subscribe_form_input_placeholder_color }} !important;
+}
+#section-{{ section.id }} .subscribe-form-inner input[type="email"]::-moz-placeholder {
+  color: {{ section.settings.subscribe_form_input_placeholder_color }} !important;
+}
+#section-{{ section.id }} .subscribe-form-inner input[type="email"]:-ms-input-placeholder {
+  color: {{ section.settings.subscribe_form_input_placeholder_color }} !important;
+}
+#section-{{ section.id }} .subscribe-form-inner input[type="email"]:-moz-placeholder {
+  color: {{ section.settings.subscribe_form_input_placeholder_color }} !important;
+}
+
+#section-{{ section.id }} .subscribe-form-inner button {
+    color: {{ section.settings.subscribe_form_button_text_color }};
+    background-color: {{ section.settings.subscribe_form_button_bg_color }};
+    border-radius: {{ section.settings.subscribe_form_button_border_radius }}px;
+}
+#section-{{ section.id }} .subscribe-form-inner button:hover {
+    color: {{ section.settings.subscribe_form_button_hover_text_color }};
+    background-color: {{ section.settings.subscribe_form_button_hover_bg_color }};
+}
+
+
+
+
+
+{%- endstyle -%}
+
+
+{% schema %}
+  {
+    "name": "Subscribe",
+    "settings": [
+		{
+          	"type"		: 	"checkbox",
+          	"id"		: 	"subscribe_area_enable",
+          	"label"		: 	"Show Subscribe Area",
+          	"default"	: 	true
+      	},
+		{
+          	"type"		: 	"checkbox",
+          	"id"		: 	"full_width",
+          	"label"		: 	"Full Widht",
+          	"default"	: 	true
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Content"
+        },
+		{
+          	"type"		: 	"checkbox",
+          	"id"		: 	"banner_product_enable",
+          	"label"		: 	"Banner Product Show",
+          	"default"	: 	true
+      	},
+		{
+          	"type"		: 	"text",
+          	"id"		: 	"banner_product_name",
+          	"label"		: 	"Banner Product Name",
+          	"default"	: 	"Product Name"
+      	},
+		{
+          	"type"		: 	"text",
+          	"id"		: 	"banner_product_brand",
+          	"label"		: 	"Banner Product Brand Name",
+          	"default"	: 	"Brand Name"
+      	},
+		{
+          	"type"		: 	"image_picker",
+          	"id"		: 	"banner_product_image",
+          	"label"		: 	"Banner Product Image",
+			"info"		: 	"Recommended Size: 216 x 356px"
+      	},
+		{
+          	"type"		: 	"url",
+          	"id"		: 	"banner_product_url",
+          	"label"		: 	"Banner Product URL"
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Banner Product Background Image"
+        },
+		{
+          	"type"		: 	"image_picker",
+          	"id"		: 	"banner_product_bg_image",
+          	"label"		: 	"Banner Product Background Image",
+			"info"		: 	"Recommended Size: 778 x 560px"
+      	},
+		{
+          	"type"		: 	"checkbox",
+          	"id"		: 	"banner_product_bg_image_enable",
+          	"label"		: 	"Banner Product Background Image Show",
+			"default"	: 	false
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Area"
+        },
+		{
+          	"type"		: 	"textarea",
+          	"id"		: 	"subscribe_sub_title",
+          	"label"		: 	"Subscribe Sub Title",
+          	"default"	: 	"Subscribe Sub Title",
+			"info"		: 	"Use span tag for theme color <span>Text</span> "
+      	},
+		{
+          	"type"		: 	"textarea",
+          	"id"		: 	"subscribe_title",
+          	"label"		: 	"Subscribe Title",
+          	"default"	: 	"Subscribe Title"
+      	},
+		{
+          	"type"		: 	"textarea",
+          	"id"		: 	"subscribe_brief",
+          	"label"		: 	"Subscribe Brief",
+          	"default"	: 	"Subscribe Brief"
+      	},
+		{
+          	"type"		: 	"text",
+          	"id"		: 	"email_placeholder",
+          	"label"		: 	"Email Placeholder Text",
+          	"default"	: 	"Enter your email here"
+      	},
+		{
+          	"type"		: 	"text",
+          	"id"		: 	"button_title",
+          	"label"		: 	"Subscribe Button Text",
+          	"default"	: 	"Subscribe"
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Area Shape Image"
+        },
+		{
+          	"type"		: 	"image_picker",
+          	"id"		: 	"subscribe_area_shape_1",
+          	"label"		: 	"Subscribe Area Shape Image",
+			"info"		: 	"Recommended Size: 213 x 306px"
+      	},
+		{
+          	"type"		: 	"checkbox",
+          	"id"		: 	"subscribe_area_shape_1_enable",
+          	"label"		: 	"Shape Image show / Hide",
+          	"default"	: 	true
+      	},
+
+
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Area Style"
+        },
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Product Style"
+        },
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"banner_product_name_color",
+          	"label"		: 	"Product Title Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"banner_product_brand_name_color",
+          	"label"		: 	"Product Brand Name Color"
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Style"
+        },
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_sub_title_color",
+          	"label"		: 	"Subscribe Subtitle Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_sub_title_span_color",
+          	"label"		: 	"Subscribe Subtitle -Span- Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_title_color",
+          	"label"		: 	"Subscribe Title Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_brief_color",
+          	"label"		: 	"Subscribe Brief Color"
+      	},
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Form Style"
+        },
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_input_border_color",
+          	"label"		: 	"Subscribe Form Input Border Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_input_bg_color",
+          	"label"		: 	"Subscribe Form Input Background Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_input_text_color",
+          	"label"		: 	"Subscribe Form Input Text Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_input_placeholder_color",
+          	"label"		: 	"Subscribe Form Input Placeholder Text Color"
+      	},
+        {
+          "type"		:	"range",
+          "id"			:	"subscribe_form_input_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Input Border Radius",
+          "unit"		:	"px",
+          "default"		:	50
+        },
+		{
+		 	"type"		:	"header",
+          	"content"	: 	"Subscribe Form Button Style"
+        },
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_button_text_color",
+          	"label"		: 	"Subscribe Form Button Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_button_bg_color",
+          	"label"		: 	"Subscribe Form Button Background Color"
+      	},
+        {
+          "type"		:	"range",
+          "id"			:	"subscribe_form_button_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Input Border Radius",
+          "unit"		:	"px",
+          "default"		:	50
+        },
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_button_hover_text_color",
+          	"label"		: 	"Subscribe Form Button Hover Color"
+      	},
+		{
+          	"type"		: 	"color",
+          	"id"		: 	"subscribe_form_button_hover_bg_color",
+          	"label"		: 	"Subscribe Form Button Hover Background Color"
+      	},
+        {
+          "type": "header",
+          "content": "Snow Fall"
+        },
+        {
+            "type": "checkbox",
+            "id": "snow_enable",
+            "label": "Snow Fall Enable",
+            "default": false		
+        }
+		
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Subscribe",
+		  "category": "5. about"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

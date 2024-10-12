@@ -1,0 +1,11 @@
+{%- if product.handle != blank -%}
+<a class="action-wishlist tile-actions--btn flex wishlist-btn wishlist wishlist-3" href="javascript: void(0)" button-wishlist data-product-handle="{{ product.handle }}">
+  <span class="icon">
+    <i class="show-when-no-active bardy bardy-wishlist"></i>
+    <i class="show-when-active bardy bardy-wishlist-fill"></i>
+    
+    <i class="hover-icon active-no  bardy bardy-wishlist"></i>
+    <i class="hover-icon active-yes bardy bardy-wishlist-fill"></i>
+  </span>
+</a>
+{% endif %}

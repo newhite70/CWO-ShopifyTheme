@@ -1,0 +1,836 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="product-section section pt-90 pb-90 pt-lg-80 pb-lg-80 pt-md-70 pb-md-70 pt-sm-60 pb-sm-60 pt-xs-50 pb-xs-50" id="section-{{ section.id }}" data-section="ProductTemplate">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 without-sidebar col-12">
+
+        <div class="product-details">
+          <!-- Image -->
+          <div class="product-image bottom-thumbnail mb-xs-20">
+            <div class="product-gallery-sticky ">
+              <!-- Image -->
+              <div class="product-slider">
+                <div class="item" id="ProductPhoto">
+                  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}       
+                  <img id="ProductPhotoImg" class="product_variant_image{% if section.settings.product_zoom_enable %} product-zoom{% endif %}" 
+                       data-image-id="{{ image.id }}" alt="{{ featured_image.alt | escape }}" 
+                       data-zoom-image="{{ featured_image | img_url: '1024x1024' }}" 
+                       src="{{ featured_image | img_url: '1024x1024' }}">
+                </div>
+              </div>
+              {%- if product.images.size > 1 -%}
+              <div class="product-slider single-product-thumb-slider-syn" id="ProductThumbs" {% if settings.rtl_enable %}dir="rtl"{% endif %}>
+                {% for image in product.images %}
+                <div class="item">
+                  <a class="product-single__thumbnail {% if forloop.first and section.settings.product_zoom_enable %}active{% endif %}" href="{{ image.src | img_url: '1024x1024' }}" 
+                     data-image="{{ image.src | img_url: '1024x1024' }}" data-zoom-image="{{ image.src | img_url: '1024x1024' }}" data-image-id="{{ image.id }}">
+                    <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+              {%- endif -%} 
+            </div>
+              
+          </div>
+          <!-- Content -->
+          <div class="product-content">
+            {% form 'product', product, id: "AddToCartForm" %}   
+            <div class="product-content-inner">
+              <div class="body">
+                {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                {%- when 'title' -%}
+                <h4 class="title" id="popup_cart_title">{{ product.title }}</h4>
+
+                {%- when 'price' -%}
+                <div class="">
+                  <span class="price"><span id="ProductPrice">{{ product.selected_or_first_available_variant.price | money }}</span> 
+                    <span class="old">{%- if product.compare_at_price_max > product.price -%}
+                      <span id="ComparePrice">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </span>
+                  </span>                  
+                </div>
+
+                {%- when 'description' -%}
+                {%- unless block.settings.product_description_handle == 'without_description' -%}
+                {%- if block.settings.product_description_handle == 'full_description' -%}
+                {{ product.description }}
+                {%- elsif block.settings.product_description_handle == 'short_description' -%}
+                <div class="product-description">
+                  {%- if product.description contains '[short_description]' -%} 
+                  {%- assign short_description_first = product.description | split:'[/short_description]' | first -%}
+                  {%- assign short_description_final = short_description_first | split:'[short_description]' | last -%}
+                  {{ short_description_final }}
+                  {%- else -%}
+                  {%- assign truncatewords_count = block.settings.truncatewords_count_handle -%}
+                  {{ product.description | strip_html | truncatewords: truncatewords_count | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first | split: '[countdown]' | first }}
+                  {%- endif -%}
+                </div>
+                {%- endif -%}
+                {%- endunless -%}
+
+                {%- when 'countdown' -%}
+                {% if product.description contains '[countdown]' %}
+                {% assign count_down_first = product.description | split:'[/countdown]' | first %}
+                {% assign count_down_final = count_down_first | split:'[countdown]' | last %}
+                <div data-countdown="{{ count_down_final }}"></div> 
+                {% endif %}
+
+                {%- when 'variants' -%}
+                <div class="size">
+                  {%- render 'product-variant', variant: variant, current_variant: current_variant, block: block -%}
+                </div>
+
+                {%- when 'action_buttons' -%}
+                {%- if product.description contains '[affiliate_link]' -%}
+                {%- include 'affiliate-product-cart-action' -%}
+                {%- else -%}
+                <div class="quantity quantity-selector">
+                  <h4>Quantity:</h4>
+                  <div class="pro-qty"><input type="text" value="1" name="quantity"></div>
+                </div>
+                {% include 'product-cart-action' %}
+                {%- endif -%}
+
+                {%- unless product.description contains '[affiliate_link]' -%}
+                {%- if product.available and block.settings.dynamic_checkout_button_enable -%}
+                {{ form | payment_button }}
+                {%- endif -%}
+                {%- endunless -%}
+
+                {%- when 'share_and_payment' -%}
+                {%- if block.settings.social_share_enable -%}
+                {%- include 'social-share' -%}
+                {%- endif -%}
+
+                {%- if block.settings.payment_option_enable -%}
+                <div class="custom-payment-options">
+                  {%- if block.settings.payment_information != '' -%}
+                  <div>
+                    {{ block.settings.payment_information }}
+                  </div>
+                  {%- endif -%}
+                  {%- if block.settings.payment_image -%}
+                  <img src="{{ block.settings.payment_image | img_url: '1024x1024' }}" alt="{{ block.settings.payment_image.alt }}">
+                  {%- endif -%}
+                </div>
+                {%- endif -%}
+
+
+                {%- when 'complementary' -%}
+                <div
+                  class="product-complementary"
+                  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=complementary"
+                >
+                  {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+                      <h4>Pair it with</h4>
+                      <div class="row product-complementary__carousel product-slider">
+                        {%- for product in recommendations.products -%}
+                          <div class="col">
+                          {% render 'product-grid-item-small' with product as product %}
+                          </div>
+                        {%- endfor -%}
+                      </div>
+                  {%- endif -%}
+                </div>
+                
+                <script>
+                  const handleIntersection = (entries, observer) => {
+                    if (!entries[0].isIntersecting) return;
+                
+                    observer.unobserve(productRecommendationsSection);
+                
+                    const url = productRecommendationsSection.dataset.url;
+                
+                    fetch(url)
+                      .then(response => response.text())
+                      .then(text => {
+                        const html = document.createElement('div');
+                        html.innerHTML = text;
+                        const recommendations = html.querySelector('.product-complementary');
+                
+                        if (recommendations && recommendations.innerHTML.trim().length) {
+                          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+                
+                          // product carousel active
+                          $('.product-complementary__carousel').slick({
+                              speed: 1000,
+                              autoplay: false,
+                              slidesToShow: 3,
+                              adaptiveHeight: true,
+                              prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-angle-left"></i></button>',
+                              nextArrow: '<button type="button" class="slick-next"><i class="fa fa-angle-right"></i></button>',
+                              responsive: [{
+                                  breakpoint: 992,
+                                  settings: {
+                                      slidesToShow: 3
+                                  }
+                              },
+                              {
+                                  breakpoint: 768,
+                                  settings: {
+                                      slidesToShow: 2,
+                                      arrows: true
+                                  }
+                              },
+                              {
+                                  breakpoint: 480,
+                                  settings: {
+                                      slidesToShow: 2,
+                                      arrows: true
+                                  }
+                              }]
+                          });
+                          
+                        }
+                      })
+                      .catch(e => {
+                        console.error(e);
+                      });
+                  };
+                
+                  const productRecommendationsSection = document.querySelector('.product-complementary');
+                  const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+                
+                  observer.observe(productRecommendationsSection);
+                </script>
+
+
+                {%- when 'text' -%}
+                <p class="product-text">
+                  {{ block.settings.text }}
+                </p>
+                {%- when '@app' -%}
+                {%- render block -%}
+                {% endcase %}
+                {% endfor %}
+
+              </div>
+            </div>
+            {% endform %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- Product Section End -->
+
+
+
+<style>
+  
+  {% if section.settings.breadcrumb_banner_image %}
+  .breadcrumbs {
+    background: url("{{ section.settings.breadcrumb_banner_image | img_url: 'master' }}") no-repeat scroll center center / cover;
+      }
+  {% endif %}
+  
+    
+  {%- if section.settings.section_color_enable -%}
+  .product-details .product-content .product-content-inner .title {
+    color: {{ section.settings.product_details_product_title_color }};
+  }
+  .product-details .product-content .product-content-inner .price {
+    color: {{ section.settings.product_details_product_price_color }};
+  }
+  .product-details .product-content .product-content-inner .price .old {
+    color: {{ section.settings.product_details_product_old_price_color }};
+  }
+  .product-details .product-content .product-content-inner .body p,
+  .product-details .product-content .product-content-inner .body .product-description {
+    color: {{ section.settings.product_details_product_pragraph_color }};
+  }
+  .product-details .product-content-inner .swatch .header,
+  .product-details .product-content .product-content-inner .body .quantity h4,
+  .product-details .product-content-inner .share-icons > span {
+    color: {{ section.settings.product_details_product_swatch_title_color }};
+  }
+  
+  #ProductPhoto.item {
+    padding: {{ section.settings.product_details_product_image_padding }}px;
+    background-color: {{ section.settings.product_details_product_image_bg_color }};
+    border-color: {{ section.settings.product_details_product_image_border_color }};
+  }
+  
+  .product-details .product-content .product-content-inner .body .quantity .pro-qty .qtybtn {
+    background-color: {{ section.settings.product_details_quantity_plus_minus_bg_color }};
+    color: {{ section.settings.product_details_quantity_plus_minus_color }};
+  }
+  .product-details .product-content .product-content-inner .body .quantity .pro-qty input {
+    background-color: {{ section.settings.product_details_quantity_bg_color }};
+    color: {{ section.settings.product_details_quantity_color }};
+  }
+  
+  .product-details .product-content .product-content-inner .body .product-action button > span {
+    background-color: {{ section.settings.product_details_add_to_cart_btn_bg_color }};
+    color: {{ section.settings.product_details_add_to_cart_btn_color }};
+  }
+  .product-details .product-content .product-content-inner .body .product-action button > span:hover {
+    background-color: {{ section.settings.product_details_add_to_cart_btn_hover_bg_color }};
+    color: {{ section.settings.product_details_add_to_cart_btn_hover_color }};
+  }
+
+  .product-details .product-content .product-content-inner .body a span.icon i, 
+  .product-details .product-content .product-content-inner .body button span.icon i {
+    color: {{ section.settings.product_details_wishlist_icon_color }};
+  }
+  .product-details .product-content .product-content-inner .body a:hover span.icon i.hover-icon, 
+  .product-details .product-content .product-content-inner .body button:hover span.icon i.hover-icon {
+    color: {{ section.settings.product_details_wishlist_icon_hover_color }};
+  }
+    
+  .shopify-payment-button__button--unbranded {
+    background-color: {{ section.settings.product_details_shopify_payment_button_bg_color }} !important;
+    color: {{ section.settings.product_details_shopify_payment_button_color }} !important;
+  }
+  .shopify-payment-button__button--unbranded:hover {
+    background-color: {{ section.settings.product_details_shopify_payment_button_hover_bg_color }} !important;
+    color: {{ section.settings.product_details_shopify_payment_button_hover_color }} !important;
+  }
+  {%- endif -%}
+</style>
+
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+        {
+          "type"	: "image_picker",
+          "id"		: "breadcrumb_banner_image",
+          "label"	: "Breadcrumb Banner Image",
+          "info"	: "only for a specific page"
+        },
+		{
+          "type": "header",
+          "content": "Product Zoom"
+      	},
+		{
+          "type": "checkbox",
+          "id": "product_zoom_enable",
+          "label": "Product Zoom Enable",
+          "default": true		
+      	},
+		{
+          "type": "select",
+          "id": "zoom_type",
+          "label": "Zoom Type",
+		  "options":[
+				{
+                    "label": "Lens",
+                    "value": "lens"
+                },
+                {
+                    "label": "Window",
+                    "value": "window"
+                },
+                {
+                    "label": "Inner",
+                    "value": "inner"
+                }
+			],
+			"default": "inner"
+      	},
+		{
+          "type": "header",
+          "content": "Image Popup"
+      	},
+		{
+          "type": "checkbox",
+          "id": "product_popup_enable",
+          "label": "Product Popup Enable",
+          "default": true,
+		  "info": "When 'Product Zoom' enabled then it applicable"	
+      	},
+        {
+          "type": "header",
+          "content": "Color"
+        },
+        {
+          "type": "checkbox",
+          "id": "section_color_enable",
+          "label": "Color Enable",
+          "default": false,
+          "info": "Enable the field for color customization"
+        },
+		{
+		  "type": "header",
+          "content": "Product Style"
+        },
+		{
+          "type": "color",
+          "id": "product_details_product_title_color",
+          "label": "Product Title Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_product_price_color",
+          "label": "Product Price Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_product_old_price_color",
+          "label": "Product Old Price Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_product_pragraph_color",
+          "label": "Product Paragraph Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_product_swatch_title_color",
+          "label": "Product Swatch Title Color"
+      	},
+
+		{
+		  "type": "header",
+          "content": "Product Image Style"
+        },
+        {
+          "type": "range",
+          "id": "product_details_product_image_padding",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "label": "Image Padding",
+          "unit": "px",
+          "default": 20
+        },
+		{
+          "type": "color",
+          "id": "product_details_product_image_bg_color",
+          "label": "Image Background Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_product_image_border_color",
+          "label": "Image Border Color"
+      	},
+
+		{
+		  "type": "header",
+          "content": "Quantity Style"
+        },
+		{
+          "type": "color",
+          "id": "product_details_quantity_plus_minus_color",
+          "label": "Plus Minus Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_quantity_plus_minus_bg_color",
+          "label": "Plus Minus Background Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_quantity_color",
+          "label": "Quantity Count Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_quantity_bg_color",
+          "label": "Quantity Count Background Color"
+      	},
+
+		{
+		  "type": "header",
+          "content": "Add To Cart Button Style"
+        },
+		{
+          "type": "color",
+          "id": "product_details_add_to_cart_btn_color",
+          "label": "Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_add_to_cart_btn_bg_color",
+          "label": "Background Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_add_to_cart_btn_hover_color",
+          "label": "Hover Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_add_to_cart_btn_hover_bg_color",
+          "label": "Hover Background Color"
+      	},
+
+		{
+		  "type": "header",
+          "content": "Wishlist Icon Style"
+        },
+		{
+          "type": "color",
+          "id": "product_details_wishlist_icon_color",
+          "label": "Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_wishlist_icon_hover_color",
+          "label": "Hover Color"
+      	},
+
+		{
+		  "type": "header",
+          "content": "Shopify Payment Button Style"
+        },
+		{
+          "type": "color",
+          "id": "product_details_shopify_payment_button_color",
+          "label": "Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_shopify_payment_button_bg_color",
+          "label": "Background Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_shopify_payment_button_hover_color",
+          "label": "Hover Color"
+      	},
+		{
+          "type": "color",
+          "id": "product_details_shopify_payment_button_hover_bg_color",
+          "label": "Hover Background Color"
+      	}
+
+
+	],
+	"blocks":[
+        {
+          "type": "@app"
+        },
+		{
+          "type": "title",
+          "name": "Title",
+		  "limit": 1
+        },
+		{
+          "type": "price",
+          "name": "Price",
+		  "limit": 1
+        },
+		{
+          "type": "description",
+          "name": "Description",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Product Description"
+            },
+            {
+              "type": "radio",
+              "id": "product_description_handle",
+              "label": "Description Handle",
+              "options":[
+                    {
+                        "label": "Full Description",
+                        "value": "full_description"
+                    },
+                    {
+                        "label": "Short Description",
+                        "value": "short_description"
+                    },
+                    {
+                        "label": "Without Description",
+                        "value": "without_description"
+                    }
+                ],
+                "default": "short_description"
+            },
+            {
+              "type": "text",
+              "id": "truncatewords_count_handle",
+              "label": "Description Word Count",
+              "default": "35",
+              "info": "If 'Short Description' is selected and the shortcode is not used, then it will be applicable"
+            }
+          ]
+        },
+		{
+          "type": "variants",
+          "name": "Variants",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "radio",
+              "id": "product_variant_handle",
+              "label": "Variant Option",
+              "options":[
+                    {
+                        "label": "Select Option",
+                        "value": "product_variant_select_option"
+                    },
+                    {
+                        "label": "Swatch Option",
+                        "value": "product_variant_swatch_option"
+                    },
+                    {
+                        "label": "Without Variant",
+                        "value": "product_variant_without_option"
+                    }
+                ],
+                "default": "product_variant_swatch_option"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_variant_image",
+              "label": "Variant image enable",
+              "default": false,
+              "info": "The variant image will replace in color field if each variant each image selected. It's applicable for 'Swatch Option'"
+            }
+          ]
+        },
+		{
+          "type": "countdown",
+          "name": "Countdown",
+		  "limit": 1,
+          "settings": [
+          ]
+        },
+		{
+          "type": "action_buttons",
+          "name": "Action Buttons",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "checkbox",
+              "id": "dynamic_checkout_button_enable",
+              "label": "Enable Dynamic Checkout Buttons",
+              "default": true
+            }
+          ]
+        },
+		{
+          "type": "share_and_payment",
+          "name": "Share & Payment",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "header",
+              "content": "Social Share Option"
+            },
+            {
+              "type": "checkbox",
+              "id": "social_share_enable",
+              "label": "Show Social Share",
+              "default": true
+            },
+            {
+              "type": "text",
+              "id": "social_share_title",
+              "label": "Social Share Title",
+              "default": "Share:"
+            },
+            {
+              "type": "header",
+              "content": "Payment Option"
+            },
+            {
+              "type": "checkbox",
+              "id": "payment_option_enable",
+              "label": "Show Payment Option",
+              "default": true
+            },
+            {
+              "type": "richtext",
+              "id": "payment_information",
+              "label": "Information",
+              "default": "<p>Guaranteed safe checkout</p>"
+            },
+            {
+              "type": "image_picker",
+              "id": "payment_image",
+              "label": "Payment Image"
+            }
+          ]
+        },
+        {
+          "type": "complementary",
+          "name": "Complementary",
+          "settings": [
+          ]
+        },
+		{
+          "type": "text",
+          "name": "Text",
+          "settings": [
+            {
+              "type": "text",
+              "id": "text",
+              "label": "Text",
+              "default": "Type text"	
+            }
+          ]
+        }
+	]
+  }
+{% endschema %}
+
+
+{%- if section.settings.product_zoom_enable -%}
+<script src="{{ 'jquery.elevateZoom-3.0.8.min.js' | asset_url }}"></script>
+{%- endif -%}
+
+{%- if section.settings.product_popup_enable -%}
+<script src="{{ 'jquery.fancybox.min.js' | asset_url }}"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.fancybox').fancybox();
+  });
+</script>
+{%- endif -%}
+
+
+<script>
+  var selectCallback = function(variant, selector) {
+    timber.productPage({
+      money_format: "{{ shop.money_format }}",
+      variant: variant,
+      selector: selector
+    });
+    
+    if (variant) {
+      
+      // Current variant select+
+      var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      for (var i=0,length=variant.options.length; i<length; i++) {
+        var val = variant.options[i].replace(/'/g,"&#039;");
+        var radioButton = form.find(".swatch[data-option-index='" + i + "'] :radio[value='" + val +"']");
+        if (radioButton.size()) {
+          radioButton.get(0).checked = true;
+        }
+      }
+
+      // Current sku pass
+      $('.variant-sku').text(variant.sku);
+    }else {
+      $('.variant-sku').empty();
+    } 
+    
+    
+    {%- comment -%}
+    // in stock / out stock product start
+    if (variant) {
+      if (variant.inventory_management == "shopify" && variant.inventory_policy != "continue") {
+        if (variant.inventory_quantity > 0) {
+          jQuery('#variant-inventory').text(variant.inventory_quantity + ' in stock');
+        } else {
+          jQuery('#variant-inventory').text("Out of stock");
+        }
+      } else {
+        jQuery('#variant-inventory').text("In stock");
+      }
+    } else {
+      jQuery('#variant-inventory').text("");
+    }
+    {%- endcomment -%}  
+    
+    
+    {%- if section.settings.product_zoom_enable -%}
+    // product image zoom with variant
+    if (variant && variant.featured_image) { 
+      jQuery('#ProductThumbs a[data-image-id="' + variant.featured_image.id + '"]').trigger('click'); 
+    }
+    {%- endif -%}
+
+  };
+  
+
+
+  jQuery(function($) {
+    new Shopify.OptionSelectors('productSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label for="productSelect-option-0">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+  
+  
+  {%- if section.settings.product_zoom_enable -%}
+  function productZoom(){
+    $(".product-zoom").elevateZoom({
+      gallery: 'ProductThumbs',
+      galleryActiveClass: "active",
+      zoomType: "{{ section.settings.zoom_type }}",
+      cursor: "crosshair"
+    });
+    {%- if section.settings.product_popup_enable -%}
+    $(".product-zoom").on("click", function(e) {
+      var ez = $('.product-zoom').data('elevateZoom');
+      $.fancybox(ez.getGalleryList());
+      return false;
+    });
+    {% endif %}
+  };
+  function productZoomDisable(){
+    if( $(window).width() < 767 ) {
+      $('.zoomContainer').remove();
+      $(".product-zoom").removeData('elevateZoom');
+      $(".product-zoom").removeData('zoomImage');
+    } else {
+      productZoom();
+    }
+  };
+
+  productZoomDisable();
+
+  $(window).resize(function() {
+    productZoomDisable();
+  });
+  
+  
+  {%- endif -%}
+  
+  
+  /*----- 
+      Quantity
+  --------------------------------*/
+  $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
+  $('.pro-qty').append('<span class="inc qtybtn">+</span>');
+  $('.qtybtn').on('click', function() {
+    var $button = $(this);
+    var oldValue = $button.parent().find('input').val();
+    if ($button.hasClass('inc')) {
+      var newVal = parseFloat(oldValue) + 1;
+    } else {
+      // Don't allow decrementing below zero
+      if (oldValue > 0) {
+        var newVal = parseFloat(oldValue) - 1;
+      } else {
+        newVal = 0;
+      }
+    }
+    $button.parent().find('input').val(newVal);
+  });
+</script>

@@ -1,0 +1,489 @@
+{% if section.settings.google_map_enable == true %}
+<div class="google-map-container mb-80" id="section-{{ section.id }}">
+  <div id="google-map"></div>
+</div>
+{% endif %}
+
+
+{%- style -%}
+  #section-{{ section.id }} {
+    {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'section_margin' -%}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {%- when 'section_padding' -%}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {%- when 'section_background' -%}    
+    background: {{ block.settings.section_bg_color }} 
+      {%- if block.settings.section_bg_image -%}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){%- endif -%} no-repeat scroll center center / cover;
+    {%- endcase -%}
+    {%- endfor -%}
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {% case block.type %}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_md }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_md }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_md }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_md }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'section_margin' -%}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {%- when 'section_padding' -%}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {%- endcase -%}
+      {%- endfor -%}
+    }
+  }
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name"		: 	"Google Map",
+    "settings"	:	[
+      {
+        "type"		:	"checkbox",
+        "id"		:	"google_map_enable",
+        "label"		:	"Google Map Show / Hide",
+        "default"	:	true
+      },
+      {
+        "type"		: 	"header",
+        "content"	:	"Section Heading"
+      },
+      {
+        "type"		:	"textarea",
+        "id"		:	"google_map_api_key",
+        "label"		:	"Google Map API Key",
+        "default"	:	"AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo"
+      },
+      {
+        "type"		:	"text",
+        "id"		:	"google_map_latitude",
+        "label"		:	"Google Map Latitude",
+        "default"	:	"40.740610"
+      },
+      {
+        "type"		:	"text",
+        "id"		:	"google_map_longitude",
+        "label"		:	"Google Map Longitude",
+        "default"	:	"-73.935242"
+      },
+      {
+        "type"		:	"image_picker",
+        "id"		:	"google_map_markers_image",
+        "label"		:	"Google Map Marker Image",
+        "info"		:	"Recommended Size: 50x50px"
+      },
+      {
+        "type"		:	"text",
+        "id"		:	"google_map_zoom",
+        "label"		:	"Google Map Zoom",
+        "default"	:	"12"
+      }
+    ],
+	"blocks"	:	[
+      {
+        "type"		: 	"section_padding",
+        "name"		: 	"Section Padding",
+        "limit"		: 	1,
+        "settings"	: 	[
+          {
+            "type"		: 	"header",
+            "content"	: 	"Large/Desktop Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_padding_top",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Top",
+            "unit"		:	"px",
+            "default"	: 	0
+          },
+          {
+			"type"		:	"range",
+            "id"		:	"section_padding_bottom",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Bottom",
+            "unit"		:	"px",
+            "default"	:	100
+          },
+          {
+            "type"		: 	"header",
+            "content"	: 	"Tablet Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_padding_top_md",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Top",
+            "unit"		:	"px",
+            "default"	: 	0
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_padding_bottom_md",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Bottom",
+            "unit"		:	"px",
+            "default"	: 	80
+          },
+          {
+            "type"		: 	"header",
+            "content"	: 	"Mobile Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_padding_top_xs",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Top",
+            "unit"		:	"px",
+            "default"	: 	0
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_padding_bottom_xs",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Padding Bottom",
+            "unit"		:	"px",
+            "default"	: 	60
+          }
+      	]
+	  },
+      {
+        "type"		:	"section_margin",
+        "name"		:	"Section Margin",
+        "limit"		:	1,
+        "settings"	:	[
+          {
+            "type"		:	"header",
+            "content"	:	"Large/Desktop Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_margin_top",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Top",
+            "unit"		:	"px",
+            "default"	:	 0
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_margin_bottom",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Bottom",
+            "unit"		:	"px",
+            "default"	:	0
+          },
+          {
+            "type"		:	"header",
+            "content"	:	"Tablet Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_margin_top_md",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Top",
+            "unit"		:	"px",
+            "default"	:	0
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_margin_bottom_md",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Bottom",
+            "unit"		:	"px",
+            "default"	: 	0
+          },
+          {
+            "type"		:	"header",
+            "content"	:	"Mobile Device"
+          },
+          {
+            "type"		:	"range",
+            "id"		:	"section_margin_top_xs",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Top",
+            "unit"		:	"px",
+            "default"	: 	0
+          },
+          {
+			"type"		:	"range",
+            "id"		:	"section_margin_bottom_xs",
+            "min"		:	0,
+            "max"		:	150,
+            "step"		:	5,
+            "label"		:	"Margin Bottom",
+            "unit"		:	"px",
+            "default"	:	0
+          }
+		]
+	  },
+      {
+        "type"		:	"section_background",
+        "name"		:	"Section Background",
+        "limit"		:	1,
+        "settings"	: 	[
+          {
+            "type"		:	"image_picker",
+            "id"		:	"section_bg_image",
+            "label"		:	"BG Image"
+          },
+          {
+            "type"		:	"color",
+            "id"		:	"section_bg_color",
+            "label"		:	"BG Color",
+            "default"	:	"#ffffff"
+          }
+        ]
+      }
+	],
+	"presets": [
+		{
+            "name"		: 	"Google Map",
+            "category"	: 	"5. about"
+		}
+	]
+  }
+{% endschema %}
+
+
+<!-- Google Map -->
+<script src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.22&key={{ section.settings.google_map_api_key }}"></script>
+
+<script>
+        // When the window has finished loading create our google map below
+        google.maps.event.addDomListener(window, 'load', init);
+
+        function init() {
+            // Basic options for a simple Google Map
+            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            var mapOptions = {
+                // How zoomed in you want the map to start at (always required)
+              zoom: {{ section.settings.google_map_zoom }},
+
+                scrollwheel: false,
+
+                // The latitude and longitude to center the map (always required)
+                center: new google.maps.LatLng({{ section.settings.google_map_latitude }}, {{ section.settings.google_map_longitude }}), // New York
+
+                // How you would like to style the map. 
+                // This is where you would paste any style found on
+
+                styles: [{
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#e9e9e9"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [{
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#dedede"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [{
+                                "visibility": "on"
+                            },
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [{
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#333333"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [{
+                            "visibility": "off"
+                        }]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [{
+                                "color": "#f2f2f2"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [{
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [{
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            // Get the HTML DOM element that will contain your map 
+            // We are using a div with id="map" seen below in the <body>
+            var mapElement = document.getElementById('google-map');
+
+            // Create the Google Map using our element and options defined above
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+            // Let's also add a marker while we're at it
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng({{ section.settings.google_map_latitude }}, {{ section.settings.google_map_longitude }}),
+              map: map,
+              title: 'Bardy',
+              icon: "{% if section.settings.google_map_markers_image %}{{ section.settings.google_map_markers_image | img_url: 'medium' }}{% else %}https:\/\/cdn.shopify.com\/s\/files\/1\/0114\/0994\/8731\/files\/map-marker.png?1884 {% endif %}",
+                animation: google.maps.Animation.BOUNCE
+            });
+        }
+    </script>

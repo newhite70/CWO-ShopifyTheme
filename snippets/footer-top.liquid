@@ -1,0 +1,45 @@
+<!-- Footer Top Section Start -->
+<div class="footer-top-section section bg-dark {% if section.settings.snow_enable %}rel-area{%endif%}">
+  
+  {%- if section.settings.snow_enable -%}
+  <span class="effect-body ice_effect"></span>
+  {%- endif -%} 
+
+  <div class="container">
+    <div class="footer-widget-wrap row">
+		
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'about_info' %}
+      <div class="col mb-40">
+        <div class="footer-widget">
+          {% if block.settings.footer_logo_image  %}
+          <img src="{{ block.settings.footer_logo_image | img_url: '160x160' }}" alt="{{ block.settings.footer_logo_image.alt }}">
+          {% endif %}
+          
+          {% if block.settings.footer_about_brief %}
+          {{ block.settings.footer_about_brief }}
+          {% endif %}
+        </div>
+      </div>
+
+      {% when 'footer_menu' %}
+      <div class="col mb-40">
+        <div class="footer-widget">
+          {% if block.settings.footer_menu_title != '' %}
+          <h3 class="title">{{ block.settings.footer_menu_title }}</h3>
+          {% endif %}
+          <ul>
+            {%- assign footer_menu = block.settings.footer_menu_handle -%}
+            {% for link in linklists[footer_menu].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+			{% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div><!-- Footer Top Section End -->

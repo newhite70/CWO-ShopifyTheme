@@ -1,0 +1,100 @@
+<div class="product-description-review-area">
+  <div class="container">
+    <div class="product-description-review">
+      <div class="description-review-title nav" role=tablist>
+        {% if section.settings.product_info_tab_enable %}
+        <a href="#pro-dec" data-toggle="tab" role="tab" {% if section.settings.tab_active_handle == 'info_tab' %}class="active" aria-selected="true"{% endif %}>
+          {{ section.settings.product_info_tab_title }}
+        </a>
+        {% endif %}
+        {% if section.settings.product_review_tab_enable %}
+        <a href="#pro-review" data-toggle="tab" role="tab" {% if section.settings.tab_active_handle == 'review_tab' %}class="active" aria-selected="true"{% endif %}>
+          {{ section.settings.product_review_tab_title }}
+        </a>
+        {% endif %}
+        {% if product.description contains '[product_video]' %}
+        <a href="#product-video" data-toggle="tab" aria-selected="false">
+          {{ section.settings.product_video_title }}
+        </a>
+        {% endif %}
+        {% if section.settings.product_comments_enable %}
+        <a href="#comment-box" data-toggle="tab" aria-selected="false" {% if section.settings.tab_active_handle == 'comment_tab' %}class="active" aria-selected="true"{% endif %}>
+          {{ section.settings.product_comments_title }}
+        </a>
+        {% endif %}
+
+        {% assign i = 1 %}
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'custom_tab' %}
+        <a href="#custom-tab-{{ i }}" data-toggle="tab" role="tab" aria-selected="false">
+          {{ block.settings.custom_tab_title }}
+        </a>
+        {% assign i = i | plus: 1 %}
+        {% endcase %}
+        {% endfor %}
+      </div>
+
+      <div class="description-review-text tab-content">
+        {% if section.settings.product_info_tab_enable %}
+        <div class="tab-pane {% if section.settings.tab_active_handle == 'info_tab' %}active{% endif %}" id="pro-dec" role="tabpanel">
+          {%- if product.description contains '[product_description]' -%}            
+          {%- assign product_description_first = product.description | split:'[/product_description]' | first -%}
+          {%- assign product_description_final = product_description_first | split:'[product_description]' | last -%} 
+          {{ product_description_final }}
+          {%- else -%}
+          {{ product.description | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first | split: '[countdown]' | first }}
+          {%- endif -%}
+        </div>
+        {% endif %}
+        {% if section.settings.product_review_tab_enable %}
+        <div class="tab-pane {% if section.settings.tab_active_handle == 'review_tab' %}active{% endif %}" id="pro-review" role="tabpanel">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {%- render block -%}
+            {% endcase %}
+          {% endfor %}
+        </div>
+        {% endif %}  
+        {% if product.description contains '[product_video]' %}
+        <div class="tab-pane" id="product-video" role="tabpanel">                
+          {% assign product_video_first = product.description | split:'[/product_video]' | first %}
+          {% assign product_video_final = product_video_first | split:'[product_video]' | last %} 
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ product_video_final }}" frameborder="0" allowfullscreen></iframe> 										
+        </div>
+        {% endif %}
+
+        {% if section.settings.product_comments_enable %}
+        <div role="tabpanel" class="tab-pane {% if section.settings.tab_active_handle == 'comment_tab' %}active{% endif %}" id="comment-box">
+          <div class="fb-comment-box">
+            <!-- disqus comment box start -->
+            {% if section.settings.product_page_comments_box =='disqus_comment' %}
+            {% include 'disqus-comment' %}
+            {% endif %}
+            <!-- disqus comment box end -->                
+            <!-- facebook comment box start -->
+            {% if section.settings.product_page_comments_box == 'facebook_comment' %}
+            {% include 'facebook-comment' %}
+            {% include 'facebook-comment-box-script' %}
+            {% endif %}
+            <!-- facebook comment box end -->
+          </div>
+        </div>
+        {% endif %}
+
+        {% assign i = 1 %}
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'custom_tab' %}
+        <div class="tab-pane" id="custom-tab-{{ i }}" role="tabpanel">
+          {{ pages[block.settings.custom_tab_handle].content }}
+        </div>
+        {% assign i = i | plus: 1 %}
+        {% endcase %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>

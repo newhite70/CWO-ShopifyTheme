@@ -1,0 +1,117 @@
+<div class="product-recommendations product-section section pb-90 pb-lg-80 pt-md-70 pb-md-70 pb-sm-60 pb-xs-50" id="section-{{ section.id }}" data-section="RelatedProduct" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.related_product_limit_handle }}&intent=related">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-12">
+        {% include 'related-product' %}
+      </div>
+    </div>
+  </div>
+</div><!-- Product Section End -->
+
+<script>
+  const handleIntersection = (entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+
+    observer.unobserve(productRecommendationsSection);
+
+    const url = productRecommendationsSection.dataset.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+
+          var $RelatedProductCarousel = $('.product-slider-3');
+          $RelatedProductCarousel.slick({
+            infinite: true,
+            slidesToScroll: 1,
+            {% if settings.rtl_enable %}
+            rtl: true, 
+            prevArrow: '<button class="slick-prev"><i class="fa fa-angle-right"></i></button>',
+            nextArrow: '<button class="slick-next"><i class="fa fa-angle-left"></i></button>',
+            {% else %}
+            prevArrow: '<button class="slick-prev"><i class="fa fa-angle-left"></i></button>',
+            nextArrow: '<button class="slick-next"><i class="fa fa-angle-right"></i></button>',
+            {% endif %}
+            dots: false
+          });
+          
+          $("img.lazyload").lazyload(); 
+                
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  };
+
+  const productRecommendationsSection = document.querySelector('.product-recommendations');
+  const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+
+  observer.observe(productRecommendationsSection);
+</script>
+
+
+{% schema %}
+  {
+    "name": "Related Product",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Section Title Here"
+      	},
+		{
+            "type": "header",
+            "content": "Product Options"
+        },
+		{
+			"type": "header",
+            "content": "Product Column"
+        },
+		{
+            "type": "range",
+            "id": "product_column",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "label": "Desktop",
+            "default": 4
+        },
+		{
+            "type": "range",
+            "id": "product_column_md",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "label": "Tablet",
+            "default": 3
+        },
+		{
+            "type": "range",
+            "id": "product_column_sm",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "label": "Mobile",
+            "default": 2
+        },
+		{
+            "type": "text",
+            "id": "related_product_limit_handle",
+            "label": "Product Limit",
+			"default": "10"
+      	}
+	]
+  }
+{% endschema %}

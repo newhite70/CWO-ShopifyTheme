@@ -1,0 +1,90 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%} 
+
+<div class="product-item {{ variant.id }}">
+  <!-- Image -->
+  <div class="product-image">
+    <!-- Image -->
+    <a class="image" href="{{ product.url | within: collection }}">
+      <img class="popup_cart_image" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+    </a>
+
+    <!-- Product Action -->
+    <div class="product-action">     
+      {%- unless product.description contains '[affiliate_link]' -%}
+
+      {% if product.available %}
+      {% if settings.product_cart_type == 'ajax_popup_cart' %}
+      <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="cart">
+        <span class="icon"><i class="bardy bardy-shopping-cart"></i><i class="hover-icon bardy bardy-shopping-cart"></i></span>
+      </a>
+      {% elsif settings.product_cart_type == 'without_ajax_cart' %}
+      <form action="/cart/add" method="post" enctype="multipart/form-data">
+        <select name="id" style="display:none;">
+          {% for variant in product.variants %}
+          <option value="{{ variant.id }}">{{ variant.title | escape }} - {{ variant.price | money }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="cart">
+          <span class="icon"><i class="bardy bardy-shopping-cart"></i><i class="hover-icon bardy bardy-shopping-cart"></i></span>
+        </button>
+      </form>
+      {% endif %}
+      {% else %}
+      <button class="cart cart-disable">
+        <span class="icon"><i class="bardy bardy-shopping-cart"></i><i class="hover-icon bardy bardy-shopping-cart"></i></span>
+      </button>
+      {% endif %}
+
+      {%- if settings.wishlist_enable -%}
+      {%- render 'wishlist-button-3' with product as product -%}
+      {%- endif -%}
+
+      {%- if settings.product_quickview_enalbe -%}
+      <div>
+        <a class="quickview" title="Quick View" data-toggle="modal" data-target="#quickViewModal" href="javascript:void(0);" 
+           onclick="quiqview('{{ product.handle | handleize }}')"><span class="icon"><i class="bardy bardy-quick-view"></i><i class="hover-icon bardy bardy-quick-view"></i></span>
+        </a>
+      </div>
+      {%- endif -%}
+
+
+      {%- endunless -%}
+
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="product-content--">
+    <div class="head">
+      <!-- Price -->
+      <div class="right4444">
+        <span class="price">{{ product.variants.first.price | money }} 
+          {% if product.variants.first.compare_at_price > product.variants.first.price %}
+          <span class="old">{{ product.variants.first.compare_at_price | money }}</span>
+          {% endif %}
+        </span>
+      </div>
+      
+      <!-- Title & Ratting -->
+      <div class="left44444">
+        <h4 class="title popup_cart_title"><a href="{{ product.url | within: collection }}">{{ product.title }}</a></h4>
+        <span class="ratting">
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

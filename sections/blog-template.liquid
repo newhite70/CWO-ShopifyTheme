@@ -1,0 +1,332 @@
+<div class="blog-section section pt-90 pb-90 pt-lg-80 pb-lg-80 pt-md-70 pb-md-70 pt-sm-60 pb-sm-60 pt-xs-50 pb-xs-50">
+  <div class="container">
+    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}flex-row-reverse{% endif %}">
+      {%- assign blogs_limit = section.settings.blog_limit_handle -%}
+      {%- paginate blog.articles by blogs_limit -%} 
+      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col-lg-12 {% else %}col-lg-8{% endif %}  mb-sm-50 mb-xs-50">
+        <div class="row">
+          {% for article in blog.articles %}
+          <div class="col-lg-{{ section.settings.blog_column }} col-md-6 col-12 mb-30">
+            {% if section.settings.blog_style_handle == 'grid_view' %}
+            {% render 'blog-grid-item', article: article %}
+            {% elsif section.settings.blog_style_handle == 'list_view' %}
+            {% render 'blog-list-item', article: article %}
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {%- if paginate.pages > 1 -%}
+        <div class="row  mt-10">
+          <div class="col">
+            {% render 'pagination' %}
+          </div>
+        </div>
+        {%- endif -%}
+      </div>
+      {%- endpaginate -%}
+      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+      <div class="col-lg-4 pr-30 pr-sm-15 pr-md-15 pr-xs-15">
+        {% render 'blog-sidebar', paginate: paginate %}
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+
+<style>
+  
+  {% if section.settings.breadcrumb_banner_image %}
+  .breadcrumbs {
+    background: url("{{ section.settings.breadcrumb_banner_image | img_url: 'master' }}") no-repeat scroll center center / cover;
+  }
+  {% endif %}
+  
+  
+  .blog-item {
+    background-color: {{ section.settings.blog_item_bg_color }};
+  }
+  .blog-item .content .title a {
+    color: {{ section.settings.blog_item_title_color }};
+  }
+  .blog-item .content .title a:hover {
+    color: {{ section.settings.blog_item_title_hover_color }};
+  }
+  .blog-item .content .blog-meta li {
+    color: {{ section.settings.blog_item_meta_color }};
+  }
+  .blog-item .content .blog-meta li a:hover {
+    color: {{ section.settings.blog_item_meta_hover_color }};
+  }
+  .blog-item .content p {
+    color: {{ section.settings.blog_item_brief_color }};
+  }
+  .blog-item .content .read-more {
+    color: {{ section.settings.blog_item_read_more_btn_color }};
+  }
+  .blog-item .content .read-more:hover {
+    color: {{ section.settings.blog_item_read_more_btn_hover_color }};
+  }
+  
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Blog Page",
+    "settings": [
+        {
+          "type"	: "image_picker",
+          "id"		: "breadcrumb_banner_image",
+          "label"	: "Breadcrumb Banner Image",
+          "info"	: "only for a specific page"
+        },
+		{
+			"type"		:	"text",
+			"id"		:	"latest_blog_button",
+			"label"		:	"Blog Button",
+			"default"	:	"Read More"
+		},
+		{
+          "type": "radio",
+          "id": "blog_style_handle",
+          "label": "Blog Style",
+		  "options":[
+				{
+					"label": "Grid View",
+					"value": "grid_view"
+				},
+                {
+					"label": "List View",
+					"value": "list_view"
+				}
+			],
+			"default": "grid_view",
+			"info": "Select 1 column for 'List View'"
+      	},
+		{
+          "type": "select",
+          "id": "blog_column",
+          "label": "Post Column",
+		  "options":[
+				{
+					"label": "1 Blog",
+					"value": "12"
+				},
+                {
+					"label": "2 Blogs",
+					"value": "6"
+				},
+				{
+					"label": "3 Blogs",
+					"value": "4"
+				},
+				{
+					"label": "4 Blogs",
+					"value": "3"
+				}
+			],
+			"default": "6"
+      	},
+		{
+          "type": "text",
+          "id": "blog_limit_handle",
+          "label": "Post Limit",
+		  "default": "9",
+		  "info": "How many posts will appear on each page"
+      	},
+		{
+			"type": "text",
+			"id": "athor_by_text",
+			"label": "Athor By Text",
+			"default": "By - "
+		},
+        {	
+          "type"		:	"checkbox",
+          "id"			:	"article_brief_enable",
+          "label"		:	"Article Brief Enable",
+          "default"		:	true
+        },
+        {	
+          "type"		:	"number",
+          "id"			:	"blog_content_count_handle",
+          "label"		:	"Blog Cotent Letter Count",
+          "default"		:	135,
+          "info"		:	"It will work if the excerpt is empty."
+        },
+
+		{
+			"type"		:	"header",
+			"content"	:	"Blog Item Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_title_color",
+			"label"		:	"Title Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_title_hover_color",
+			"label"		:	"Title Hover Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_meta_color",
+			"label"		:	"Meta Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_meta_hover_color",
+			"label"		:	"Meta Hover Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_brief_color",
+			"label"		:	"Paragraph Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_read_more_btn_color",
+			"label"		:	"Read More Button Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"blog_item_read_more_btn_hover_color",
+			"label"		:	"Read More Button Hover Color"
+		},
+
+		{
+			"type": "header",
+			"content": "Blog Sidebar"
+		},
+		{
+			"type": "radio",
+			"id": "sidebar_handle",
+			"label": "Sidebar Position",
+			"options": [
+				{
+					"label": "Left Sidebar",
+					"value": "left_sidebar_handle"
+				},
+				{
+					"label": "Right Sidebar",
+					"value": "right_sidebar_handle"
+				},
+				{
+					"label": "Without Sidebar",
+					"value": "without_sidebar"
+				}
+			],
+			"default": "left_sidebar_handle"
+		}
+	 ],
+	 "blocks":[
+		{
+          "type": "search",
+          "name": "Search",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "search_title",
+              "label": "Search Title",
+              "default": "Search"
+            },
+            {
+              "type": "text",
+              "id": "sidebar_search_placeholder",
+              "label": "Sidebar Search Placeholder",
+              "default": "Enter key words"
+            },
+            {
+              "type": "text",
+              "id": "sidebar_search_form_button_text",
+              "label": "Sidebar Search Form Button Text",
+              "default": "Search"
+            }
+          ]
+       },
+	   {
+          "type": "menu",
+          "name": "Menu",
+          "settings": [
+            {
+              "type": "text",
+              "id": "menu_title",
+              "label": "Menu Title",
+              "default": "Custom Menu"
+            },
+			{
+              "type": "link_list",
+              "id": "menu_handle",
+              "label": "Menu"
+            }
+          ]
+       },
+	   {
+          "type": "recent_post",
+          "name": "Recent Post",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "recent_post_title",
+              "label": "Recent Post Title",
+              "default": "Recent Post"
+			},
+            {
+              "type": "range",
+              "id": "recent_post_limit_handle",
+              "min": 2,
+              "max": 10,
+              "step": 1,
+              "label": "Post Limit",
+              "default": 3
+            }
+          ]
+       },
+	   {
+          "type": "archive",
+          "name": "Archive",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "archive_title",
+              "label": "Archive Title",
+              "default": "Archive"
+            }
+          ]
+       },
+	   {
+          "type": "tag",
+          "name": "Tag",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "blog_tags_title",
+              "label": "Tags Title",
+              "default": "Tags"
+			},
+            {
+              "type": "range",
+              "id": "blog_tags_list_limit_handle",
+              "min": 5,
+              "max": 20,
+              "step": 1,
+              "label": "Tag Limit",
+              "default": 10
+            }
+          ]
+       }
+	]
+  }
+{% endschema %}

@@ -1,0 +1,27 @@
+<h3>{{ 'blogs.comments.title' | t }}</h3>
+
+<div class="comment-form">
+  {% form 'new_comment', article %}
+
+  {{ form.errors | default_errors }}
+
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <input type="text" class="{% if form.errors contains 'author' %}error{% endif %}" name="comment[author]" id="commentAuthor" value="{{ form.author }}" placeholder="{{ 'blogs.comments.name' | t }}">
+    </div>
+    <div class="col-md-6 col-12">
+      <input type="text" class="{% if form.errors contains 'email' %}error{% endif %}" name="comment[email]" id="commentEmail" value="{{ form.email }}" placeholder="{{ 'blogs.comments.email' | t }}">
+    </div>
+    <div class="col-12">
+      <textarea class="custom-textarea" name="comment[body]" id="commentBody"  placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+    </div>
+    <div class="col-12"><button type="submit">SEND NOW</button></div>
+  </div>
+
+
+  {% if blog.moderated? %}
+  <p>{{ 'blogs.comments.moderated' | t }}</p>
+  {% endif %}
+
+  {% endform %}
+</div>

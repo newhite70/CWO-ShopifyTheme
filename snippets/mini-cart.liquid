@@ -1,0 +1,115 @@
+{% assign itemStyle = '' %}{% if cart.item_count == 0 %}{% assign itemStyle = ' style="display:none;"' %}{% endif %}
+{% assign itemEmpty = '' %}{% if cart.item_count == 0 %}{% assign itemEmpty = ' style="display:block;"' %}{% endif %}
+{% assign itemCount = '' %}{% if cart.item_count == 1 %}{% assign itemCount = ' style="display:block;"' %}{% endif %}
+{% assign itemCount2 = '' %}{% if cart.item_count > 1 %}{% assign itemCount2 = ' style="display:block;"' %}{% endif %}
+
+
+<!-- Cart Toggle -->
+<button class="header-cart-toggle"><i class="bardy bardy-shopping-cart"></i><span class="number bigcounter">{{ cart.item_count }}</span></button>
+
+<!-- Header Mini Cart Start -->
+<div class="header-mini-cart">
+  <!-- Mini Cart Head -->
+  <div class="mini-cart-head mini-cart-empty" {{ itemEmpty }}>
+    <h3>{{ 'cart.general.empty' | t }}</h3>
+  </div>
+  
+  <div class="mini-cart-head item-style" {{ itemStyle }}>
+    <h3>{{ section.settings.mini_cart_title }}</h3>
+  </div>
+  
+  <!-- Mini Cart Body -->
+  <div class="mini-cart-body item-style" {{ itemStyle }}>
+    <div class="mini-cart-body-inner custom-scroll">
+      <ul>
+        {% for item in cart.items %}
+        <li class="mini-cart-product">
+          <div class="image">
+            <a href="{{ item.url }}"><img src="{{ item | img_url: 'small' }}" alt=""></a>
+            <a class="remove" href="javascript:void(0);" onclick="Shopify.removeItem({{ item.variant.id }})"><i class="fa fa-trash-o"></i></a>
+          </div>
+          <div class="content">
+            <a class="title" href="{{ item.url }}">{{ item.title }}</a>
+            <span>{{ item.quantity }} x {{ item.price | money }}</span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <!-- Mini Cart Footer -->
+  <div class="mini-cart-footer item-style" {{ itemStyle }}>
+    <h4>Subtotal: <span class="shopping-cart__total">{{ cart.total_price | money }}</span></h4>
+    <div class="buttons">
+      <a href="/cart">{{ section.settings.view_cart_title }}</a>
+      <a href="/checkout">{{ section.settings.checkout_title }}</a>
+    </div>
+  </div>
+</div><!-- Header Mini Cart End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %}
+
+
+
+
+{%- assign item_count = cart.item_count -%}
+<span class="bigcounter">{{ item_count }}</span>
+<span class="item-single-item-count" {{ itemCount }}>{{ section.settings.cart_item_title }}</span> 
+<span class="item-multiple-item-count" {{ itemCount2 }}>{{ section.settings.cart_items_title }}</span>
+<span class="cart-empty-title" {{ itemEmpty }}>{{ section.settings.cart_items_title }}</span>
+|
+<span class="shopping-cart__total">{{ cart.total_price | money }}</span>
+
+
+<ul>  
+  <li class="cart-empty-title" {{ itemEmpty }}>
+    <h3>{{ 'cart.general.empty' | t }}</h3>
+  </li>
+  <li class="single-product-cart single-cart-item-loop" {{ itemStyle  }}>
+    {% for item in cart.items %}
+    <div class="cart-single-item">
+      <div class="cart-img">
+        <a href="{{ item.url }}"><img src="{{ item | img_url: 'small' }}" alt=""></a>
+      </div>
+      <div class="cart-title">
+        <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+        <span>{{ section.settings.quantity_itltle }}  {{ item.quantity }} x {{ item.price | money }}</span>
+      </div>
+      <div class="cart-delete">
+        <a href="javascript:void(0);" onclick="Shopify.removeItem({{ item.variant.id }})">Remove</a>
+      </div>
+    </div>
+    {% endfor %}
+  </li>
+  <li class="single-product-cart mini-cart-action" {{ itemStyle  }}>
+    <div class="cart-total">
+      <h4>{{ 'cart.label.total' | t }}: <span class="shopping-cart__total">{{ cart.total_price | money }}</span></h4>
+    </div>
+  </li>
+  <li class="single-product-cart mini-cart-action" {{ itemStyle  }}>
+    <div class="cart-checkout-btn">
+      <a class="btn-hover cart-btn-style" href="/cart">{{ section.settings.view_cart_title }}</a>
+      <a class="no-mrg btn-hover cart-btn-style" href="/checkout">{{ section.settings.checkout_title }}</a>
+    </div>
+  </li>
+</ul>
+
+
+{% endcomment %}

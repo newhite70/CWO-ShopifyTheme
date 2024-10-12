@@ -1,0 +1,254 @@
+<!-- Brand Section Start -->
+<div data-section="BrandLogo" class="brand-section" {% if settings.rtl_enable %}dir="rtl"{% endif %} id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+
+      <div class="brand-slider section">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'brand_logo' %}
+        <div class="brand-item col">
+          {% if block.settings.brand_logo_image %}
+          <img class="lazyload" src="{{ block.settings.brand_logo_image | img_url: 'master' }}" alt="{{ block.settings.brand_logo_image.alt }}">
+          {%- else -%}
+          <img src="https://dummyimage.com/117x85/cccccc/fff&text=brand" alt="{{ block.settings.banner_image_1.alt }}">
+          {%- endif -%}
+        </div>
+        {% endcase %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div><!-- Brand Section End -->
+
+
+<style>
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Brand Logo",
+    "settings": [
+		
+			
+	],
+
+	"blocks":[
+		{
+          "type": "brand_logo",
+          "name": "Brand Logo",
+          "settings": [
+			{
+			  "type": "range",
+			  "id": "banner_column",
+			  "min": 1,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Banner Column",
+			  "unit": "/12",
+			  "default": 6
+			},
+            {
+                "type"		:	"image_picker",
+                "id"		:	"brand_logo_image",
+                "label"		:	"Brand Logo Image"
+            }
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Brand Logo",
+		  "category": "5. about",
+		  "blocks":[
+				{
+					"type": "brand_logo"
+				},
+				{
+					"type": "brand_logo"
+				},
+				{
+					"type": "brand_logo"
+				},
+				{
+					"type": "brand_logo"
+				},
+				{
+					"type": "brand_logo"
+				},
+				{
+					"type": "brand_logo"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

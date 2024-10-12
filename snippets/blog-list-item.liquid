@@ -1,0 +1,24 @@
+<div class="home-blog">
+  <a class="image" href="{{ article.url }}" style="background-image: url({{ article | img_url: 'large', crop: '295x288' }})">image</a>
+
+  <div class="content">
+    <h3 class="title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <ul class="blog-meta">
+      <li>{{ section.settings.athor_by_text }} {{ article.author }}</li>
+      <li>{{ article.published_at | date: "%d %B, %Y" }}</li>
+    </ul>
+    <div>
+    {% if section.settings.article_brief_enable == true %}
+    {% if article.excerpt.size > 0 %}
+    {{ article.excerpt }}
+    {% else %}
+    {% assign blog_content_count = section.settings.blog_content_count_handle %}
+    {{ article.content | truncate: blog_content_count }}
+    {% endif %}
+    {% endif %}
+    </div>
+    {% if section.settings.latest_blog_button != '' %}
+    <a href="{{ article.url }}" class="read-more">{{ section.settings.latest_blog_button }}</a>
+    {% endif %}
+  </div>
+</div>

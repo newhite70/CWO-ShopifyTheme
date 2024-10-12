@@ -1,0 +1,455 @@
+<div data-section="LatestBlog" class="blog-section" id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row row-3">
+
+      <div class="col-lg-4 col-12 mb-5">
+        <div class="blog-section-title">
+          {% if section.settings.blog_area_title != '' %}
+          <h1>{{ section.settings.blog_area_title }}</h1>
+          {% endif %}
+          
+          {% if section.settings.blog_area_brief != '' %}
+          <p>{{ section.settings.blog_area_brief }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-8 col-12 mb-5">
+        <div class="blog-slider" {% if settings.rtl_enable %}dir="rtl"{% endif %}>
+          {% assign blog = blogs[section.settings.blog_handle] %}
+          {% assign blog_limit = section.settings.blog_limit_handle %}
+          {% for article in blog.articles limit: blog_limit %}
+          {% include 'blog-list-item' %}
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!-- Blog Section End -->
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+
+
+  #section-{{ section.id }} .blog-section-title {
+      background-color: {{ section.settings.latest_blog_section_title_area_bg_color }};
+  }
+  #section-{{ section.id }} .blog-section-title h1 {
+      color: {{ section.settings.latest_blog_section_title_color }};
+  }
+  #section-{{ section.id }} .blog-section-title p {
+      color: {{ section.settings.latest_blog_section_brief_color }};
+  }
+
+  #section-{{ section.id }} .home-blog {
+  	background-color: {{ section.settings.home_blog_item_bg_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .title a {
+    color: {{ section.settings.home_blog_item_title_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .title a:hover {
+    color: {{ section.settings.home_blog_item_title_hover_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .blog-meta li {
+    color: {{ section.settings.home_blog_item_meta_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .blog-meta li a:hover {
+    color: {{ section.settings.home_blog_item_meta_hover_color }};
+  }
+  #section-{{ section.id }} .home-blog .content p,
+  #section-{{ section.id }} .home-blog .content {
+    color: {{ section.settings.home_blog_item_brief_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .read-more {
+    color: {{ section.settings.home_blog_item_read_more_btn_color }};
+  }
+  #section-{{ section.id }} .home-blog .content .read-more:hover {
+    color: {{ section.settings.home_blog_item_read_more_btn_hover_color }};
+  }
+
+
+  #section-{{ section.id }} .blog-slider .slick-arrow {
+      background-color: {{ section.settings.latest_blog_slider_arrow_bg_color }};
+      color: {{ section.settings.latest_blog_slider_arrow_color }};
+  }
+  #section-{{ section.id }} .blog-slider .slick-arrow:hover {
+      background-color: {{ section.settings.latest_blog_slider_arrow_hover_bg_color }};
+      color: {{ section.settings.latest_blog_slider_arrow_hover_color }};
+  }
+
+
+{%- endstyle -%}
+
+
+{% schema %}
+  {
+    "name": "Latest Blog",
+    "settings": [
+		{
+			"type"		:	"header",
+			"content"	:	"Blog Area"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"blog_area_title",
+			"label"		:	"Blog Area Title",
+			"default"	:	"Section Title"
+		},
+		{
+			"type"		:	"textarea",
+			"id"		:	"blog_area_brief",
+			"label"		:	"Section Brief",
+			"default"	:	"Some of our customer say’s that they trust us and buy our product without any gitation because they can belive us"
+		},
+		{
+			"type": "header",
+            "content": "Blog Options"
+        },
+		{
+          "type": "blog",
+          "id": "blog_handle",
+          "label": "Select Blog"
+        },
+		{
+          "type": "select",
+          "id": "blog_limit_handle",
+          "label": "Blog Limit",
+		  "options":[
+				{
+					"label": "1 Blog",
+					"value": "1"
+				},
+				{
+					"label": "2 Blogs",
+					"value": "2"
+				},
+				{
+					"label": "3 Blogs",
+					"value": "3"
+				},
+				{
+					"label": "4 Blogs",
+					"value": "4"
+				},
+				{
+					"label": "6 Blogs",
+					"value": "6"
+				},
+				{
+					"label": "8 Blogs",
+					"value": "8"
+				},
+				{
+					"label": "10 Blogs",
+					"value": "10"
+				},
+				{
+					"label": "12 Blogs",
+					"value": "12"
+				},
+				{
+					"label": "14 Blogs",
+					"value": "14"
+				},
+				{
+					"label": "16 Blogs",
+					"value": "16"
+				},
+				{
+					"label": "Unlimited",
+					"value": "100"
+				}
+			],
+			"default": "6"
+      	},
+        {	
+          "type"		:	"checkbox",
+          "id"			:	"article_brief_enable",
+          "label"		:	"Article Brief Enable",
+          "default"		:	true
+        },
+        {	
+          "type"		:	"number",
+          "id"			:	"blog_content_count_handle",
+          "label"		:	"Blog Cotent Letter Count",
+          "default"		:	135,
+          "info"		:	"It will work if the excerpt is empty."
+        },
+		{
+			"type"		:	"text",
+			"id"		:	"latest_blog_button",
+			"label"		:	"Blog Button",
+			"default"	:	"Read More"
+		},
+
+		{
+			"type"		:	"header",
+			"content"	:	"Latest Blog Style"
+		},
+		{
+			"type"		:	"header",
+			"content"	:	"Section Title Area Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_section_title_area_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_section_title_color",
+			"label"		:	"Title Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_section_brief_color",
+			"label"		:	"Paragraph Color"
+		},
+
+		{
+			"type"		:	"header",
+			"content"	:	"Latest Blog Item Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_title_color",
+			"label"		:	"Title Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_title_hover_color",
+			"label"		:	"Title Hover Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_meta_color",
+			"label"		:	"Meta Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_meta_hover_color",
+			"label"		:	"Meta Hover Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_brief_color",
+			"label"		:	"Paragraph Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_read_more_btn_color",
+			"label"		:	"Read More Button Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"home_blog_item_read_more_btn_hover_color",
+			"label"		:	"Read More Button Hover Color"
+		},
+
+		{
+			"type"		:	"header",
+			"content"	:	"Slider Arrow Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_slider_arrow_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_slider_arrow_color",
+			"label"		:	"Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_slider_arrow_hover_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"latest_blog_slider_arrow_hover_color",
+			"label"		:	"Color"
+		}
+	],
+
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+      {
+        "name": "Latest Blog",
+        "category": "5. about",
+        "settings": {
+          "blog_handle": "News"
+        }
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

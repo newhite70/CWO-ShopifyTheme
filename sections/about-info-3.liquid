@@ -1,0 +1,442 @@
+{% if section.settings.about_info_3_area_enable == true %}
+<!-- About Section Start -->
+<div data-section="AboutInfo3" class="about-section section position-relative pt-90 pb-60 pt-lg-80 pb-lg-50 pt-md-70 pb-md-40 pt-sm-60 pb-sm-30 pt-xs-50 pb-xs-20 fix" id="section-{{ section.id }}">
+  <!-- About Section Shape -->
+  {% if section.settings.about_info_3_shape_1 %}
+  <div class="about-shape one rellax" data-rellax-speed="-5" data-rellax-percentage="0.5">
+    <img  class="lazyload" data-src="{{ section.settings.about_info_3_shape_1 | img_url: 'large' }}" alt="{{ section.settings.about_info_3_shape_1.alt }}">
+  </div>
+  {% endif %}
+  {% if section.settings.about_info_3_shape_2 %}
+  <div class="about-shape two rellax" data-rellax-speed="3" data-rellax-percentage="0.5">
+    <img  class="lazyload" data-src="{{ section.settings.about_info_3_shape_2 | img_url: 'large' }}" alt="{{ section.settings.about_info_3_shape_2.alt }}">
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- About Image Start -->
+      <div class="col-lg-6 col-12 order-1 order-lg-2 mb-30">
+        <div class="about-image-3 masonry-grid row row-7">
+          <div class="col-6 col">
+            {% if section.settings.about_info_3_image_1 %}
+            <img class="lazyload" data-src="{{ section.settings.about_info_3_image_1 | img_url: '295x244' }}" alt="{{ section.settings.about_info_3_image_1.alt }}">
+            {% else %}
+            <img src="https://via.placeholder.com/295x244" alt="Image">
+            {% endif %}
+          </div>
+          <div class="col-6 col">
+            {% if section.settings.about_info_3_image_1 %}
+            <img class="lazyload" data-src="{{ section.settings.about_info_3_image_2 | img_url: '296x179' }}" alt="{{ section.settings.about_info_3_image_1.alt }}">
+            {% else %}
+            <img src="https://via.placeholder.com/296x179" alt="Image">
+            {% endif %}
+          </div>
+          <div class="col-6 col">
+            {% if section.settings.about_info_3_image_1 %}
+            <img class="lazyload" data-src="{{ section.settings.about_info_3_image_3 | img_url: '296x256' }}" alt="{{ section.settings.about_info_3_image_1.alt }}">
+            {% else %}
+            <img src="https://via.placeholder.com/296x256" alt="Image">
+            {% endif %}
+          </div>
+          <div class="col-6 col">
+            {% if section.settings.about_info_3_image_1 %}
+            <img class="lazyload" data-src="{{ section.settings.about_info_3_image_4 | img_url: '295x186' }}" alt="{{ section.settings.about_info_3_image_1.alt }}">
+            {% else %}
+            <img src="https://via.placeholder.com/295x186" alt="Image">
+            {% endif %}
+          </div>
+        </div>
+      </div><!-- About Image End -->
+
+      <!-- About Content Start -->
+      <div class="col-lg-6 col-12 mr-auto order-2 order-lg-1 mb-30">
+        <div class="about-content about-content-3">
+          {% if section.settings.about_info_3_title_1 %}
+          <h3>{{ section.settings.about_info_3_title_1 }}</h3>
+          {% endif %}
+          {% if section.settings.about_info_3_title_2 %}
+          <h1>{{ section.settings.about_info_3_title_2 }}</h1>
+          {% endif %}
+          {% if section.settings.about_info_3_brief %}
+          <div class="desc">
+            {{ section.settings.about_info_3_brief }}
+          </div>
+          {% endif %}
+          {% if section.settings.about_info_3_button_title %}
+          <a href="{{ section.settings.about_info_3_button_url }}" class="btn btn-lg btn-round">{{ section.settings.about_info_3_button_title }}</a>
+          {% endif %}
+        </div>
+      </div><!-- About Content End -->
+    </div>
+  </div>
+</div><!-- About Section End -->
+{% endif %}
+
+<style>
+  #section-{{ section.id }} {
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+  
+
+  #section-{{ section.id }} .about-content h3 {
+      color: {{ section.settings.about_info_sub_title_color }};
+  }
+  #section-{{ section.id }} .about-content h1 {
+      color: {{ section.settings.about_info_title_color }};
+  }
+  #section-{{ section.id }} .about-content p {
+      color: {{ section.settings.about_info_description_color }};
+  }
+  #section-{{ section.id }} .about-content .btn {
+      color: {{ section.settings.about_info_button_text_color }};
+      background-color: {{ section.settings.about_info_button_text_bg_color }};
+      border-color: {{ section.settings.about_info_button_text_border_color }};
+      border-radius: {{ section.settings.about_info_button_border_radius }}px;
+  }
+  #section-{{ section.id }} .about-content .btn:hover {
+      color: {{ section.settings.about_info_button_hover_text_color }};
+      background-color: {{ section.settings.about_info_button_hover_text_bg_color }};
+      border-color: {{ section.settings.about_info_button_hover_text_border_color }};
+  }
+  #section-{{ section.id }} .about-image .shape {
+      border-color: {{ section.settings.about_info_image_shape_color }};
+  }
+  
+</style>
+
+
+{% schema %}
+  {
+    "name": "About Info 3",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "header Info 3 Enable"
+        },
+		{
+			"type"		:	"checkbox",
+			"id"		:	"about_info_3_area_enable",
+			"label"		:	"About Info 3 Area Enable",
+		    "default"	: 	true
+		},
+		{
+		  "type": "header",
+          "content": "Shape Image"
+        },
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_shape_1",
+			"label"		:	"About area shape one image",
+		    "info"		: 	"Recommended Size: 204 x 306px"
+		},
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_shape_2",
+			"label"		:	"About area shape two image",
+		    "info"		: 	"Recommended Size: 204 x 306px"
+		},
+		{
+		  "type"		: 	"header",
+          "content"		: 	"About 3 Images"
+        },
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_image_1",
+			"label"		:	"About image 1",
+		    "info"		: 	"Recommended Size: 295 x 244px"
+		},
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_image_2",
+			"label"		:	"About image 2",
+		    "info"		: 	"Recommended Size: 296 x 179px"
+		},
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_image_3",
+			"label"		:	"About image 3",
+		    "info"		: 	"Recommended Size: 296 x 256px"
+		},
+		{
+			"type"		:	"image_picker",
+			"id"		:	"about_info_3_image_4",
+			"label"		:	"About image 4",
+		    "info"		: 	"Recommended Size: 295 x 186px"
+		},
+		{
+		  "type"		: 	"header",
+          "content"		: 	"About 3 Content"
+        },
+		{
+			"type"		:	"textarea",
+			"id"		:	"about_info_3_title_1",
+			"label"		:	"Title 1",
+		    "default"	: 	"Provide the best"
+		},
+		{
+			"type"		:	"textarea",
+			"id"		:	"about_info_3_title_2",
+			"label"		:	"Title 2",
+		    "default"	: 	"Beard Oil For You"
+		},
+		{
+			"type"		:	"richtext",
+			"id"		:	"about_info_3_brief",
+			"label"		:	"About Info Brief",
+			"default"	: 	"<p>About info brief here</p>"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"about_info_3_button_title",
+			"label"		:	"About info button Title",
+		    "default"	: 	"Learn More"
+		},
+		{
+			"type"		:	"url",
+			"id"		:	"about_info_3_button_url",
+			"label"		:	"About info button URL"
+		},
+
+
+		{
+		  "type": "header",
+          "content": "About Info 3 Style"
+        },
+		{
+		   "type": "color",
+		   "id" : "about_info_sub_title_color",
+		   "label": "Sub Title Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_title_color",
+		   "label": "Title Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_description_color",
+		   "label": "Description Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_button_text_color",
+		   "label": "Button Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_button_text_bg_color",
+		   "label": "Button Background Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_button_text_border_color",
+		   "label": "Button Border Color"
+		},
+        {
+          "type"		:	"range",
+          "id"			:	"about_info_button_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Button Border Radius",
+          "unit"		:	"px",
+          "default"		:	50
+        },
+		{
+		   "type": "color",
+		   "id" : "about_info_button_hover_text_color",
+		   "label": "Button Hover Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_button_hover_text_bg_color",
+		   "label": "Button Hover Background Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_button_hover_text_border_color",
+		   "label": "Button Hover Border Color"
+		},
+		{
+		   "type": "color",
+		   "id" : "about_info_image_shape_color",
+		   "label": "Image Shape Color"
+		}
+
+			
+	],
+
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+
+	"presets": [
+		{
+		  "name": "About Info 3",
+		  "category": "5. about"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,284 @@
+<div class="custom-html" id="section-{{ section.id }}">
+  <div class="container">
+    <!-- Section Title Start -->
+    {%- if section.settings.section_title != '' or section.settings.section_brief != '' -%}
+    <div class="row">
+      <div class="col">
+        {% assign text_alignment = section.settings.section_title_alignment %}
+        <div class="section-title mb-60 mb-xs-40 {% if section.settings.section_title_border == true %} section-title-border {% endif %} {% if text_alignment == 'content_left' %}text-left 
+                    {% elsif text_alignment == 'content_right' %}text-right {% else %}text-center{% endif %}">
+          {%- if section.settings.section_title != '' -%}
+          <h1>{{ section.settings.section_title }}</h1>
+          {%- endif -%}
+
+          {%- if section.settings.section_brief != '' -%}
+          <p>{{ section.settings.section_brief }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div><!-- Section Title End -->
+    {%- endif -%}
+    {% if section.settings.html_content !='' %}
+    <div class="row">
+      <div class="col-12">
+        <div class="custom-html-content">
+          {{ section.settings.html_content }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if pages[section.settings.custom_page].content != '' %}
+    <div class="row">
+      <div class="col-12">
+        <div class="custom-html-content">
+          {{ pages[section.settings.custom_page].content }}
+        </div>
+      </div>
+    </div>	
+    {% endif %}
+  </div>
+</div>
+
+
+
+<style>
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+    {% endcase %}
+    {% endfor %}
+  }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Custom HTML",
+    "settings": [
+		{
+		  "type": "header",
+          "content": "Section Heading"
+        },
+		{
+			"type"		:	"text",
+			"id"		:	"section_title",
+			"label"		:	"Section Title",
+			"default"	:	"Section Title"
+		},
+		{
+			"type"		:	"textarea",
+			"id"		:	"section_brief",
+			"label"		:	"Section Title",
+			"default"	:	"Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product."
+		},
+		{
+			"type"		:	"checkbox",
+			"id"		:	"section_title_border",
+			"label"		:	"Section Title Border",
+			"default"	:	true
+		},
+        {
+        	"type"		: 	"radio",
+        	"id"		:	"section_title_alignment",
+        	"label"		: 	"Content Alignment",
+        	"options"	:	[
+              {
+                  "label"		: "Left",
+                  "value"		: "content_left"
+              },
+              {
+                  "label"		: "Right",
+                  "value"		: "content_right"
+              },
+              {
+                  "label"		: "Center",
+                  "value"		: "content_center"
+              }
+          	],
+        	"default"	: 	"content_left"
+        },
+		{
+		  "type": "header",
+          "content": "Content"
+        },
+		{
+           "type": "html",
+           "id": "html_content",
+           "label": "Custom HTML",
+           "default": "<div><p>Some HTML content</p></div>"
+        },
+		{
+          "type": "page",
+          "id": "custom_page",
+          "label": "Select Page",
+          "info": "[Create a page](\/admin\/pages\/new)"
+        }
+	],
+	"blocks":[
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Custom HTML",
+		  "category": "6. others",
+		  "blocks":[
+				{
+					"type": "section_padding"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+

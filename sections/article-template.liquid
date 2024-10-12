@@ -1,0 +1,250 @@
+<div class="article-area blog-section section pt-90 pb-90 pt-lg-80 pb-lg-80 pt-md-70 pb-md-70 pt-sm-60 pb-sm-60 pt-xs-50 pb-xs-50">
+  <div class="container">
+    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}flex-row-reverse{% endif %}">
+      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col-lg-12{% else %}col-lg-8{% endif %}">
+        <div class="single-blog-item">
+          <div class="article">
+            <img src="{{ article | img_url: 'master' }}" alt="{{ article.image.alt }}">
+            <div class="content">
+              <h3>{{ article.title }}</h3>
+              <ul class="blog-meta">
+                <li>{{ section.settings.athor_by_text }} {{ article.author }}</li>
+                <li>{{ article.published_at | date: "%d %B, %Y" }}</li>
+              </ul>
+              <div class="desc">
+                {{ article.content }}
+              </div>   
+              
+              <div class="blog-footer">
+                {% render 'tags-article' with tag as tags %}
+                {% render 'blog-share' %} 
+              </div>
+
+              
+              {% if blog.next_article or blog.previous_article %}
+              <div class="blog-navigation">
+                {% if blog.previous_article %}
+                <a href="{{ blog.previous_article }}" class="prev-blog"><i class="fa fa-long-arrow-left"></i>Previous</a>
+                {% endif %}
+                {% if blog.next_article %}
+                <a href="{{ blog.next_article }}" class="next-blog"><i class="fa fa-long-arrow-right"></i>Next</a>
+                {% endif %}
+              </div>
+              {% endif %} 
+            </div>
+          </div>
+
+          {%- if article.comments_enabled? -%}
+          {%- assign comment_post_limit = section.settings.comment_post_limit_handle -%}
+          {%- paginate article.comments by comment_post_limit -%}
+          <div id="comments" class="comment-wrap pt-90 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50">
+            {%- if article.comments.size > 0 -%}
+            <h3>{{ 'blogs.comments.with_count' | t: count: article.comments_count }}</h3>
+            {%- endif -%}
+            
+            {%- if comment and comment.created_at -%}
+            <p class="note form-success">
+              {%- if blog.comments_modareted? -%}
+              {{ 'blogs.comments.success_moderated' | t }}            
+              {%- else -%}
+              {{ 'blogs.comments.success' | t }}
+              {%- endif -%}
+            </p>
+            {%- endif -%}
+            
+            {%- if article.comments.size > 0 -%}
+            {%- render 'blog-comments' -%}
+            {%- endif -%}
+            {%- if paginate.pages > 1 -%}
+            <div class="comment-pagination">
+              {% render 'pagination' %}
+            </div>
+            {%- endif -%}
+            {%- endpaginate -%}
+            {%- render 'blog-comment-form' -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+      <div class="col-lg-4">
+        {% render 'blog-sidebar' %}
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% if section.settings.breadcrumb_banner_image %}
+<style>
+  .breadcrumbs {
+    background: url("{{ section.settings.breadcrumb_banner_image | img_url: 'master' }}") no-repeat scroll center center / cover;
+  }
+</style>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Article Page",
+    "settings": [
+        {
+          "type"	: "image_picker",
+          "id"		: "breadcrumb_banner_image",
+          "label"	: "Breadcrumb Banner Image",
+          "info"	: "only for a specific page"
+        },
+		{
+			"type": "header",
+			"content": "Comment Box"
+		},
+		{
+			"type": "image_picker",
+			"id": "commentator_image",
+			"label": "Comment Thumb Image",
+			"info": "Recommended Size: 100 x 100px"
+		},
+		{
+			"type": "text",
+			"id": "comment_post_limit_handle",
+			"label": "How Many Comment Post Show",
+			"default": "5"
+		},
+		{
+			"type": "text",
+			"id": "athor_by_text",
+			"label": "Athor By Text",
+			"default": "By - "
+		},
+		{
+			"type": "header",
+			"content": "Article Sidebar"
+		},
+		{
+			"type": "radio",
+			"id": "sidebar_handle",
+			"label": "Sidebar Position",
+			"options": [
+				{
+					"label": "Left Sidebar",
+					"value": "left_sidebar_handle"
+				},
+				{
+					"label": "Right Sidebar",
+					"value": "right_sidebar_handle"
+				},
+				{
+					"label": "Without Sidebar",
+					"value": "without_sidebar"
+				}
+			],
+			"default": "left_sidebar_handle"
+		}
+	],
+	"blocks":[
+		{
+          "type": "search",
+          "name": "Search",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "search_title",
+              "label": "Search Title",
+              "default": "Search"
+            },
+            {
+              "type": "text",
+              "id": "sidebar_search_placeholder",
+              "label": "Sidebar Search Placeholder",
+              "default": "Enter key words"
+            },
+            {
+              "type": "text",
+              "id": "sidebar_search_form_button_text",
+              "label": "Sidebar Search Form Button Text",
+              "default": "Search"
+            }
+          ]
+       },
+	   {
+          "type": "menu",
+          "name": "Menu",
+          "settings": [
+            {
+              "type": "text",
+              "id": "menu_title",
+              "label": "Menu Title",
+              "default": "Custom Menu"
+            },
+			{
+              "type": "link_list",
+              "id": "menu_handle",
+              "label": "Menu"
+            }
+          ]
+       },
+	   {
+          "type": "recent_post",
+          "name": "Recent Post",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "recent_post_title",
+              "label": "Recent Post Title",
+              "default": "Recent Post"
+			},
+            {
+              "type": "range",
+              "id": "recent_post_limit_handle",
+              "min": 2,
+              "max": 10,
+              "step": 1,
+              "label": "Post Limit",
+              "default": 3
+            }
+          ]
+       },
+	   {
+          "type": "archive",
+          "name": "Archive",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "archive_title",
+              "label": "Archive Title",
+              "default": "Archive"
+            }
+          ]
+       },
+	   {
+          "type": "tag",
+          "name": "Tag",
+		  "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "blog_tags_title",
+              "label": "Tags Title",
+              "default": "Tags"
+			},
+            {
+              "type": "range",
+              "id": "blog_tags_list_limit_handle",
+              "min": 5,
+              "max": 20,
+              "step": 1,
+              "label": "Tag Limit",
+              "default": 10
+            }
+          ]
+       }
+	]
+  }
+{% endschema %}

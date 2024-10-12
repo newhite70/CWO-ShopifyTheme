@@ -1,0 +1,150 @@
+<div class="product-section section pb-90 pb-lg-80 pt-md-70 pb-md-70 pb-sm-60 pb-xs-50" id="section-{{ section.id }}" data-section="InformationTab">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-12">
+        {% include 'single-product-tab' %}
+      </div>
+    </div>
+  </div>
+</div><!-- Product Section End -->
+
+
+{% schema %}
+  {
+    "name": "Information Tab",
+    "settings": [
+		{
+            "type": "radio",
+            "id": "tab_active_handle",
+            "label": "Active Tab",
+            "options": [
+              {
+                "value": "info_tab",
+                "label": "Description Tab"
+              },
+              {
+                "value": "review_tab",
+                "label": "Review Tab"
+              },
+			  {
+                "value": "comment_tab",
+                "label": "Comment Tab"
+              }
+            ],
+            "default": "info_tab"
+        },		
+		{
+            "type": "header",
+            "content": "Description Tab"
+        },
+		{
+            "type": "checkbox",
+            "id": "product_info_tab_enable",
+            "label": "Show Product Description",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "product_info_tab_title",
+            "label": "Description Title",
+            "default": "Description"
+        },
+		{
+            "type": "header",
+            "content": "Review Tab"
+        },
+		{
+            "type": "checkbox",
+            "id": "product_review_tab_enable",
+            "label": "Show Product Review",
+            "info": "Install Free Apps for Product Review [Click Here](https:\/\/apps.shopify.com\/product-reviews)",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "product_review_tab_title",
+            "label": "Title",
+            "default": "Reviews"
+        },
+		{
+            "type": "header",
+            "content": "Product Video Tab"
+        },
+        {
+            "type": "text",
+            "id": "product_video_title",
+            "label": "Title",
+            "default": "Video",
+			"info": "Use shortcode for show product video. Ex: [product_video]RmJLi7ikMXk[/product_video]"
+        },
+		{
+            "type": "header",
+            "content": "Comment Tab"
+        },
+		{
+            "type": "checkbox",
+            "id": "product_comments_enable",
+            "label": "Show Comment",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "product_comments_title",
+            "label": "Comments Title",
+            "default": "Comments"
+        },
+        {
+            "type": "radio",
+            "id": "product_page_comments_box",
+            "label": "Select comments box",
+            "options": [
+              {
+                "value": "disqus_comment",
+                "label": "Disqus comments"
+              },
+              {
+                "value": "facebook_comment",
+                "label": "Facebook comments"
+              }
+            ],
+            "default": "facebook_comment"
+        },
+        {
+            "type": "text",
+            "id": "facebook_comments_post_limit",
+            "label": "FacebooK Comment Limit",
+            "default": "10"
+        },
+        {
+            "type": "text",
+            "id": "disqus_shortname",
+            "label": "Your Store Name",
+            "default": "demo-store",
+            "info": "Disqus Shortname (Get your shortname)[disqus.com](http:\/\/disqus.com)"
+        }
+	],
+	"blocks":[
+        {
+          "type": "@app"
+        },
+	   {
+          "name": "Custom Tab",
+          "type": "custom_tab",
+          "settings": [
+              {
+                "type": "text",
+                "id": "custom_tab_title",
+                "label": "Tab Title",
+                "default": "Tab Title"
+              },
+              {
+                "type": "page",
+                "id": "custom_tab_handle",
+                "label": "Select Page for information",
+                "info": "[Create a page](\/admin\/pages\/new)"
+              }		
+          ]
+      }
+	]
+  }
+{% endschema %}

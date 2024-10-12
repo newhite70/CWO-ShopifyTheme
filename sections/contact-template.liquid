@@ -1,0 +1,505 @@
+{%- if section.settings.contact_address_contact_form_area == true -%}
+<!-- About Section Start -->
+<div class="contact-section {% unless template == 'index' %}section{% endunless %} position-relative fix" id="section-{{ section.id }}">
+
+  <div class="container">
+    <div class="row">
+      <!-- Contact Info Start -->
+      {%- if section.settings.contact_info_enable -%}
+      <div class="{% if section.settings.contact_form_enable %}col-lg-5{% else %}col-lg-12{% endif %} col-12 mb-30">
+        <div class="contact-info">
+          <ul>
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'contact_info' %}
+            <li>
+              {% if block.settings.contact_info_title != '' %}
+              <h4>{{ block.settings.contact_info_title }}</h4>
+              {% endif %}
+
+              {% if block.settings.contact_info_brief != '' %}
+              <p>{{ block.settings.contact_info_brief }}</p>
+              {% endif %}
+            </li>
+            {% endcase %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div><!-- Contact Info End -->
+	  {%- endif -%}
+      
+      <!-- Contact Form Start -->
+      {%- if section.settings.contact_form_enable -%}
+      <div class="{% if section.settings.contact_info_enable %}col-lg-7{% else %}col-lg-12{% endif %} col-12 mb-30">
+        <div class="contact-form-wrap">
+          {% if section.settings.contact_form_title != '' %}
+          <h3>{{ section.settings.contact_form_title }}</h3>
+          {% endif %}
+          
+          {% if section.settings.contact_form_brief != '' %}
+          <p>{{ section.settings.contact_form_brief }}</p>
+          {% endif %}
+          
+          <div class="contact-form">
+            {% include 'contact-form' %}
+          </div>
+
+        </div>
+      </div><!-- Contact Form End -->
+      {%- endif -%}
+
+
+    </div>
+  </div>
+</div><!-- About Section End -->
+{%- endif -%}
+
+
+
+{% if section.settings.breadcrumb_banner_image %}
+<style>
+  .breadcrumbs {
+    background: url("{{ section.settings.breadcrumb_banner_image | img_url: 'master' }}") no-repeat scroll center center / cover;
+  }
+</style>
+{% endif %}
+
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+
+
+/* Contact Address Style */
+#section-{{ section.id }} .contact-info {
+    background-color: {{ section.settings.contact_info_bg_color }};
+}
+#section-{{ section.id }} .contact-info ul li h4 {
+    color: {{ section.settings.contact_info_title_color }};
+}
+#section-{{ section.id }} .contact-info ul li p,
+#section-{{ section.id }} .contact-info ul li a{
+    color: {{ section.settings.contact_info_breif_color }};
+}
+#section-{{ section.id }} .contact-info ul li {
+    border-color: {{ section.settings.contact_info_item_border_color }};
+}
+
+/* Contact Form Style */
+#section-{{ section.id }} .contact-form-wrap h3 {
+    color: {{ section.settings.contact_form_title_color }};
+}
+#section-{{ section.id }} .contact-form-wrap p {
+    color: {{ section.settings.contact_form_brief_color }};
+}
+#section-{{ section.id }} .contact-form input {
+    color: {{ section.settings.contact_form_input_color }};
+    border-color: {{ section.settings.contact_form_input_border_color }};
+    border-radius: {{ section.settings.contact_form_input_border_radius }}px;
+}
+#section-{{ section.id }} .contact-form textarea {
+    color: {{ section.settings.contact_form_input_color }};
+    border-color: {{ section.settings.contact_form_input_border_color }};
+    border-radius: {{ section.settings.contact_form_textarea_border_radius }}px;
+    height: {{ section.settings.contact_form_textarea_height }}px;
+}
+#section-{{ section.id }} .contact-form button {
+    background-color: {{ section.settings.contact_form_button_bg_color }};
+    color: {{ section.settings.contact_form_button_color }};
+    border-radius: {{ section.settings.contact_form_button_border_radius }}px;
+}
+#section-{{ section.id }} .contact-form button:hover {
+    background-color: {{ section.settings.contact_form_button_hover_bg_color }};
+    color: {{ section.settings.contact_form_button_hover_color }};
+}
+ 
+{%- endstyle -%}
+
+{% schema %}
+  {
+    "name": "Contact Address",
+    "settings": [
+        {
+          "type"	: "image_picker",
+          "id"		: "breadcrumb_banner_image",
+          "label"	: "Breadcrumb Banner Image",
+          "info"	: "only for a specific page"
+        },
+		{
+			"type"		:	"checkbox",
+			"id"		:	"contact_address_contact_form_area",
+			"label"		:	"Show Contact Address and Contact Form Area",
+			"default"	:	true
+		},
+		{
+			"type"		:	"header",
+			"content"	:	"Contact Form"
+		},
+		{
+			"type"		:	"checkbox",
+			"id"		:	"contact_form_enable",
+			"label"		:	"Show Contact Form",
+			"default"	:	true
+		},
+		{
+			"type"		:	"textarea",
+			"id"		:	"contact_form_title",
+			"label"		:	"Contact Form Title",
+			"default"	:	"Contact Form Title"
+		},
+		{
+			"type"		:	"textarea",
+			"id"		:	"contact_form_brief",
+			"label"		:	"Contact Form Brief",
+			"default"	:	"Contact Form Brief"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"name_placeholder",
+			"label"		:	"Name Placeholder",
+			"default"	:	"Name"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"email_placeholder",
+			"label"		:	"Email Placeholder",
+			"default"	:	"Email"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"number_placeholder",
+			"label"		:	"Number Placeholder",
+			"default"	:	"Number"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"subject_placeholder",
+			"label"		:	"Subject Placeholder",
+			"default"	:	"Subject"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"message_placeholder",
+			"label"		:	"Message Placeholder",
+			"default"	:	"Message"
+		},
+		{
+			"type"		:	"text",
+			"id"		:	"form_button_name",
+			"label"		:	"Form Button Text",
+			"default"	:	"Submit"
+		},
+		{
+			"type"		:	"header",
+			"content"	:	"Contact Address"
+		},
+		{
+			"type"		:	"checkbox",
+			"id"		:	"contact_info_enable",
+			"label"		:	"Show Contact Address",
+			"default"	:	true
+		},
+		{
+			"type"		:	"header",
+			"content"	:	"Contact Address Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_info_bg_color",
+			"label"		:	"Contact Address Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_info_title_color",
+			"label"		:	"Contact Address Title Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_info_breif_color",
+			"label"		:	"Contact Address Brief Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_info_item_border_color",
+			"label"		:	"Contact Address Item Border Color"
+		},
+
+
+		{
+			"type"		:	"header",
+			"content"	:	"Contact Form Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_title_color",
+			"label"		:	"Title Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_brief_color",
+			"label"		:	"Brief Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_input_color",
+			"label"		:	"Input Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_input_border_color",
+			"label"		:	"Input Border Color"
+		},
+        {
+          "type"		:	"range",
+          "id"			:	"contact_form_input_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Input Border Radius",
+          "unit"		:	"px",
+          "default"		:	50
+        },
+        {
+          "type"		:	"range",
+          "id"			:	"contact_form_textarea_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Textarea Border Radius",
+          "unit"		:	"px",
+          "default"		:	20
+        },
+		{
+			"type"		:	"text",
+			"id"		:	"contact_form_textarea_height",
+			"label"		:	"Textarea Height"
+		},
+		{
+			"type"		:	"header",
+			"content"	:	"Contact Form Submit Button Style"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_button_bg_color",
+			"label"		:	"Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_button_color",
+			"label"		:	"Color"
+		},
+        {
+          "type"		:	"range",
+          "id"			:	"contact_form_button_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Button Border Radius",
+          "unit"		:	"px",
+          "default"		:	50
+        },
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_button_hover_bg_color",
+			"label"		:	"Hover Background Color"
+		},
+		{
+			"type"		:	"color",
+			"id"		:	"contact_form_button_hover_color",
+			"label"		:	"Hover Color"
+		}
+		
+			
+	],
+	"blocks":[
+		{
+          "type": "contact_info",
+          "name": "Contact Address",
+          "settings": [
+            {
+                "type"		:	"text",
+                "id"		:	"contact_info_title",
+                "label"		:	"Contact Info Title",
+				"default"	:	"Contact Address Title"
+            },
+            {
+                "type"		:	"textarea",
+                "id"		:	"contact_info_brief",
+                "label"		:	"Contact Address",
+				"default"	:	"Contact Address"
+            }
+          ]
+       	},
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Contact Address",
+		  "category": "5. about"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

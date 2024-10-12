@@ -1,0 +1,359 @@
+{%- if section.settings.testimonial_area_enable == true -%}
+<!-- Testimonial Section Start -->
+<div data-section="TestimonialActive" class="testimonial-section {% unless template == 'index' %}section{% endunless %} " id="section-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="testimonial-section-title section-title">
+          <h1>{{ section.settings.testimonial_title }}</h1>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-12 pl-40">
+
+        <div class="testimonial-image-slider" {% if settings.rtl_enable %}dir="rtl"{% endif %}>
+          
+          {% for block in section.blocks %}
+          {% case block.type %}
+          {% when 'testimonial' %}
+          <div class="testimonial-image">
+            {% if block.settings.testimonial_client_image != blank %}
+            <img class="lazyload" data-src="{{ block.settings.testimonial_client_image | img_url: 'master' }}" alt="{{ block.settings.testimonial_client_image }}">
+            {% else %}
+            <img class="lazyload" data-src="{{ 'author-image-2.png' | asset_url }}" alt="author-image">
+            {% endif %}
+          </div>
+          {% endcase %}
+          {% endfor %}
+          
+        </div>
+      </div>
+      <div class="col-lg-7 col-12">
+        <div class="testimonial-content-slider" {% if settings.rtl_enable %}dir="rtl"{% endif %}>
+          
+          {% for block in section.blocks %}
+          {% case block.type %}
+          {% when 'testimonial' %}
+          <div class="testimonial-content">
+            <p>{{ block.settings.testimonial_client_review }}</p>
+            <h4>{{ block.settings.testimonial_client_name }}</h4>
+            <span>{{ block.settings.testimonial_client_designation }}</span>
+          </div>
+          {% endcase %}
+          {% endfor %}
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- Testimonial Section End -->
+{%- endif -%}
+
+
+{%- style -%}
+
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+
+
+  #section-{{ section.id }} .section-title h1 {
+      color: {{ section.settings.section_title_color }};
+  }
+  #section-{{ section.id }} .testimonial-section-title::before {
+      background-color: {{ section.settings.section_title_border_color }};
+  }
+  #section-{{ section.id }} .testimonial-image-slider::before {
+      background-color: {{ section.settings.testimonial_image_bg_color }};
+  }
+  #section-{{ section.id }} .testimonial-content p {
+      color: {{ section.settings.testimonial_client_pragraph_color }};
+  }
+  #section-{{ section.id }} .testimonial-content h4 {
+      color: {{ section.settings.testimonial_client_name_color }};
+  }
+  #section-{{ section.id }} .testimonial-content span {
+      color: {{ section.settings.testimonial_client_designation_color }};
+  }
+
+  
+{%- endstyle -%}
+
+
+{% schema %}
+  {
+    "name": "Testimonial",
+    "settings": [
+      {
+        "type"		:	"checkbox",
+        "id"		:	"testimonial_area_enable",
+        "label"		:	"Show Testimonial Area",
+        "default"	: 	true
+      },
+      {
+        "type"		:	"header",
+        "content"	:	"Testimonial Section"
+      },
+      {
+        "type"		:	"text",
+        "id"		:	"testimonial_title",
+        "label"		:	"Testimonial Area Title",
+        "default"	: 	"Section Title"
+      },
+      {
+        "type"		:	"header",
+        "content"	:	"Testimonial Style"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"section_title_color",
+        "label"		:	"Section Title Color"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"section_title_border_color",
+        "label"		:	"Section Title Border Color"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"testimonial_image_bg_color",
+        "label"		:	"Testimonial Image Background Color"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"testimonial_client_pragraph_color",
+        "label"		:	"Testimonial Paragraph Color"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"testimonial_client_name_color",
+        "label"		:	"Client Name Color"
+      },
+      {
+        "type"		:	"color",
+        "id"		:	"testimonial_client_designation_color",
+        "label"		:	"Client Designation Color"
+      }
+	],
+
+	"blocks":[
+      {
+		"type": "testimonial",
+          "name": "Testimonial Client Review",
+          "settings": [
+            {
+              "type"		:	"header",
+              "content"		:	"Testimonial Client Image"
+            },
+			{
+              "type"		:	"image_picker",
+              "id"			:	"testimonial_client_image",
+              "label"		:	"Testimonial Client Image",
+			  "info"		: 	"Recommended Size: 241 x 415px"
+            },
+            {
+              "type"		:	"header",
+              "content"		:	"Testimonial Client Review"
+            },
+            {
+              "type"		:	"textarea",
+              "id"			:	"testimonial_client_review",
+              "label"		:	"Testimonial Client Review",
+			  "default"		: 	"We provide the best Beard oil all over the world. We are the world best store for Beard Oil. You can buy our product without any hesitation because we always conscious about our product quality and always maintain it properly, so you can trust and this is our main goal we believe that..."
+            },
+			{
+              "type"		: 	"text",
+              "id"			: 	"testimonial_client_name",
+              "label"		: 	"Testimonial Client Name",
+              "default"		: 	"Client Name"
+             },
+			{
+              "type"		: 	"text",
+              "id"			: 	"testimonial_client_designation",
+              "label"		: 	"Testimonial Client Designation",
+              "default"		: 	"Designation"
+             }
+          ]
+
+      },
+
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+
+
+	"presets": [
+		{
+		  "name": "Testimonial",
+		  "category": "5. about",
+		  "blocks":[
+				{
+					"type": "testimonial"
+				},
+				{
+					"type": "testimonial"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,256 @@
+/* Newsletter PopUp */
+
+.newsletter_popup_inner{
+  background: url("//bardy-demo.myshopify.com/cdn/shop/files/slider-bg-1_6d49d7e5-cbe7-4691-88af-c64249fe910f_1024x1024.jpg?v=1540376014") no-repeat scroll center center / cover;
+    }
+
+.subscribe_area > h2 {
+  color: #ffffff;
+}
+.subscribe_area > p {
+  color: #ffffff;
+}
+.grid__item h1{
+  color: ;
+}
+.subscribe-form {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.subscribe-form::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ffffff !important;
+}
+.subscribe-form::-moz-placeholder { /* Firefox 19+ */
+  color: #ffffff !important;
+}
+.subscribe-form:-ms-input-placeholder { /* IE 10+ */
+  color: #ffffff !important;
+}
+.subscribe-form:placeholder { /* Firefox 18- */
+  color: #ffffff !important;
+}
+.newsletter-btn {
+  background: #222222 none repeat scroll 0 0;
+  color: #d0a97e;
+}
+.newsletter-btn:hover{
+  background: #222222 none repeat scroll 0 0;
+  color: #d0a97e;
+}
+.popup_off{
+  color: #999999;
+}
+.newsletter_popup_inner:before {
+  background: #ffffff;
+  opacity: 0;
+}
+/* Breadcurmb Banner */
+.breadcrumbs {
+  background: #000000 ;
+    padding-top: 80px;
+    padding-bottom: 90px;
+    }
+.overlay-bg::before {
+  background: #f31717 none repeat scroll 0 0;
+  opacity: 0;
+}
+.breadcrumbs-title, .page-banner h1 {
+  color: #ffffff;
+}
+.breadcrumb-list > li > a {
+  color: #d8d8d8;
+}
+.breadcrumb-list > li::before {
+  color: #d8d8d8;
+}
+.breadcrumb-list > li {
+  color: #d8d8d8;
+}
+/* Top Bar Noticfication */
+
+.top-notification-bar {
+  background: #0000ff;
+  background: -moz-linear-gradient(left, #0000ff 0%, #000080 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, #0000ff), color-stop(100%, #000080));
+  background: -webkit-linear-gradient(left, #0000ff 0%, #000080 100%);
+  background: -o-linear-gradient(left, #0000ff 0%, #000080 100%);
+  background: -ms-linear-gradient(left, #0000ff 0%, #000080 100%);
+  background: linear-gradient(to right, #0000ff 0%, #000080 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000ff', endColorstr='#000080', GradientType=1 );
+    }
+
+.notification-entry p a {
+  background-color: #0000ff;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.notification-entry p a:hover {
+  background-color: #000080;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.notification-close-btn {
+  background-color: ;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+.notification-close-btn:hover{
+  background-color: #000080;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+.notification-entry p {
+  color: #ffffff;
+}
+.top-notification-bar::before {
+  background: rgba(0, 0, 0, 0.5);
+}
+/* Typography */
+
+
+
+
+
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-style: normal;
+  src: url("//bardy-demo.myshopify.com/cdn/fonts/open_sans/opensans_n4.5460e0463a398b1075386f51084d8aa756bafb17.woff2?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=dd5e90f2478b38ca171f8ae01f48d9a9b23223ec84cdd70c3dbc35330ff2b9b2") format("woff2"),
+       url("//bardy-demo.myshopify.com/cdn/fonts/open_sans/opensans_n4.8512334118d0e9cf94c4626d298dba1c9f12a294.woff?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=3150c721dcffa22d10550c3207722015e645e918bec042d5c1091eccfd490b84") format("woff");
+}
+
+@font-face {
+  font-family: Oswald;
+  font-weight: 400;
+  font-style: normal;
+  src: url("//bardy-demo.myshopify.com/cdn/fonts/oswald/oswald_n4.a5ee385bde39969d807f7f1297bf51d73fbf3c1e.woff2?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=ef15246adb66474920d4a1070958687969c32231cd061463e9a7edcf21285cfb") format("woff2"),
+       url("//bardy-demo.myshopify.com/cdn/fonts/oswald/oswald_n4.8f3e284746fbc2d29e34993609c51fdc432b0b24.woff?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=d2348e89b43b644c35a6f31af9a78c7cae1cabc7511e188901b06f17a090dcfe") format("woff");
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-style: normal;
+  src: url("//bardy-demo.myshopify.com/cdn/fonts/open_sans/opensans_n4.5460e0463a398b1075386f51084d8aa756bafb17.woff2?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=dd5e90f2478b38ca171f8ae01f48d9a9b23223ec84cdd70c3dbc35330ff2b9b2") format("woff2"),
+       url("//bardy-demo.myshopify.com/cdn/fonts/open_sans/opensans_n4.8512334118d0e9cf94c4626d298dba1c9f12a294.woff?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=3150c721dcffa22d10550c3207722015e645e918bec042d5c1091eccfd490b84") format("woff");
+}
+
+@font-face {
+  font-family: Oswald;
+  font-weight: 500;
+  font-style: normal;
+  src: url("//bardy-demo.myshopify.com/cdn/fonts/oswald/oswald_n5.22b74dce86cb1e4738ccceb326c9284bc24641e9.woff2?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=8acc8236a047bc6e467efeea5ded45cbd7dbbfb86ffe231a4d52d4ee207f5b24") format("woff2"),
+       url("//bardy-demo.myshopify.com/cdn/fonts/oswald/oswald_n5.c60897f79173105d5bae1e28e68e9326a4a64631.woff?h1=YmFyZHktZGVtby5hY2NvdW50Lm15c2hvcGlmeS5jb20&hmac=8861a2fa7410393ac61ce7af947ae12f6790c25112a4159897ee96931811ae8d") format("woff");
+}
+
+
+html, body, input, textarea, button, select{
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: Oswald, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+p{
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.main-menu > ul > li > a, .sub-menu li a, .mega-menu li a,
+.currency-trigger, .switcher-dropdown li a{
+  font-family: Oswald, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+
+
+/* End Typography */
+/* Custom and Customer Page */
+.theme-default-margin, .shopify-challenge__container {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+@media (max-width: 767px) {
+  .theme-default-margin, .shopify-challenge__container{
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+.create-custom-page{
+  padding-top: 100px;
+  padding-bottom: 80px;
+}
+@media (max-width: 767px) {
+  .create-custom-page{
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+}
+/* End Custom Page */
+/* QuickView */
+
+/* End Quickview */
+
+/* Start Product Item Color Support */
+.product-item {
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 18px;
+  padding-bottom: 15px;
+  background-color: #f4f4f4;
+  border-color: #ebebeb; 
+}
+.product-item .product-content .head .title {
+  color: ;
+}
+.product-item .product-content .head .title a:hover {
+  color: ;
+}
+.product-item .product-content .head .price,
+.product-item-2 .product-content .head .bottom .price {
+  color: ;
+}
+.product-item .product-content .head .price span.old {
+  color: ;
+}
+.product-item .product-content .head .ratting i {
+  color:  !important;
+}
+.product-item .product-image .product-action a span.icon i, 
+.product-item .product-image .product-action button span.icon i {
+  color: ;
+}
+.product-item .product-image .product-action a:hover span.icon i.hover-icon, 
+.product-item .product-image .product-action button:hover span.icon i.hover-icon {
+  color: ;
+}
+.product-item .single-countdown {
+  background-color: #d0a97e;
+  color: #ffffff;
+}
+.product-item-2 .product-content .head .top .title {
+    border-color: ;
+}
+
+
+span.new-title {
+  color: ;
+  background-color: ;
+}
+.sale-product {
+    color: ;
+    background-color: ;
+}
+.soldout-title {
+    color: ;
+    background-color: ;
+}
+/* End Product Item Color Support */

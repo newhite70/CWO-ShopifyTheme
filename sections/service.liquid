@@ -1,0 +1,336 @@
+{% if section.settings.footer_service_area_enable == true %}
+<!-- Service Section Start -->
+<div class="service-section " id="section-{{ section.id }}">
+  <div class="service-container">
+    <div class="row ml-0 mr-0">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'service' %}
+      <div class="service col-xl-{{ block.settings.service_column }} col-md-6 col-12">
+        
+        {% if block.settings.service_icon_image_enable %}
+        <div class="icon" style="background-image: url( {% if block.settings.service_icon_image %} {{ block.settings.service_icon_image | img_url: 'master' }} {% else %}https://cdn.shopify.com/s/files/1/0114/0994/8731/files/service-sprites.png?884 {% endif %} );"></div>
+        {% endif %}
+        
+        <div class="content">
+          
+         {% if block.settings.service_title != '' %}
+          <h3>{{ block.settings.service_title }}</h3>
+          {% endif %}
+          
+          {% if block.settings.service_brief != '' %}
+          <p>{{ block.settings.service_brief }}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    
+    </div>
+  </div>
+</div><!-- Service Section End -->
+{% endif %}
+
+
+{%- style -%}
+  #section-{{ section.id }}{
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'section_margin' %}
+    margin-top: {{ block.settings.section_margin_top }}px;
+    margin-bottom: {{ block.settings.section_margin_bottom }}px;
+    {% when 'section_padding' %}
+    padding-top: {{ block.settings.section_padding_top }}px;
+    padding-bottom: {{ block.settings.section_padding_bottom }}px;
+    {% when 'section_background' %}    
+    background: {{ block.settings.section_bg_color }} 
+      {% if block.settings.section_bg_image %}url("{{ block.settings.section_bg_image | img_url: 'master' }}"){% endif %} no-repeat scroll center center / cover;
+        {% endcase %}
+        {% endfor %}
+        }
+  @media (max-width: 767px) {
+    #section-{{ section.id }}{
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'section_margin' %}
+      margin-top: {{ block.settings.section_margin_top_xs }}px;
+      margin-bottom: {{ block.settings.section_margin_bottom_xs }}px;
+      {% when 'section_padding' %}
+      padding-top: {{ block.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ block.settings.section_padding_bottom_xs }}px;
+      {% endcase %}
+      {% endfor %}
+    }
+  }
+
+
+  #section-{{ section.id }} .service-container {
+      background-color: {{ section.settings.service_container_bg_color }};
+      border-color: {{ section.settings.service_container_border_color }};
+	  border-radius: {{ section.settings.service_container_border_radius }}px;
+  }
+  #section-{{ section.id }} .service .content h3 {
+      color: {{ section.settings.service_title_color }};
+  }
+  #section-{{ section.id }} .service .content p {
+      color: {{ section.settings.service_brief_color }};
+  }
+  #section-{{ section.id }} .service::before {
+      background-color: {{ section.settings.service_separator_border_color }};
+  }
+  
+{%- endstyle -%}
+
+
+{% schema %}
+  {
+    "name": "Service",
+    "settings": [
+		{
+           "type": "checkbox",
+           "id": "footer_service_area_enable",
+           "label": "Service Area Enable",
+           "default": true
+        },
+        {
+          "type"		:	"header",
+          "content"		:	"Service Style"
+        },
+        {
+          "type"		:	"color",
+          "id"			:	"service_container_bg_color",
+          "label"		:	"Background Color"
+        },
+        {
+          "type"		:	"color",
+          "id"			:	"service_container_border_color",
+          "label"		:	"Border Color"
+        },
+        {
+          "type"		:	"range",
+          "id"			:	"service_container_border_radius",
+          "min"			:	0,
+          "max"			:	100,
+          "step"		:	1,
+          "label"		:	"Border Radius",
+          "unit"		:	"px",
+          "default"		:	100
+        },
+        {
+          "type"		:	"color",
+          "id"			:	"service_title_color",
+          "label"		:	"Title Color"
+        },
+        {
+          "type"		:	"color",
+          "id"			:	"service_brief_color",
+          "label"		:	"Brief Color"
+        },
+        {
+          "type"		:	"color",
+          "id"			:	"service_separator_border_color",
+          "label"		:	"Service separator Border Color"
+        }
+	],
+
+	"blocks":[
+		{
+          "type": "service",
+          "name": "Service",
+          "settings": [
+			{
+			  "type": "range",
+			  "id": "service_column",
+			  "min": 1,
+			  "max": 12,
+			  "step": 1,
+			  "label": "Service Column",
+			  "unit": "/12",
+			  "default": 3
+			},
+            {
+              "type"		:	"header",
+              "content"		:	"Services Icon Change"
+            },
+            {
+              "type"		:	"image_picker",
+              "id"		:		"service_icon_image",
+              "label"		:	"Service Icon Image"
+            },
+			{
+              "type"		: 	"checkbox",
+              "id"		: 		"service_icon_image_enable",
+              "label"		: 	"Service Icon Image Show",
+              "default"	: 	true
+             },
+            {
+                "type"		:	"text",
+                "id"		:	"service_title",
+                "label"		:	"Service Title",
+				"default"	:	"Quality Products"
+            },
+            {
+                "type"		:	"textarea",
+                "id"		:	"service_brief",
+                "label"		:	"Service Brief",
+				"default"	:	"We ensure the product quality that is our main goal"
+            }
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": -100,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": -100,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop/Tablate Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			}
+          ]
+       },
+	   {
+          "type": "section_background",
+          "name": "Section Background",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "image_picker",
+			  "id": "section_bg_image",
+			  "label": "BG Image"
+			},
+			{
+			  "type": "color",
+			  "id": "section_bg_color",
+			  "label": "BG Color",
+			  "default": "#ffffff"
+			}
+          ]
+       }
+	],
+	"presets": [
+		{
+		  "name": "Service",
+		  "category": "5. about",
+		  "blocks":[
+				{
+					"type": "service"
+				},
+				{
+					"type": "service"
+				},
+				{
+					"type": "service"
+				},
+				{
+					"type": "service"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

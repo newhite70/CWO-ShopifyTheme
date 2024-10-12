@@ -1,0 +1,27 @@
+<div class="product-cart-action product-action">
+  {% if product.available %}
+
+  {% if settings.product_cart_type == 'ajax_popup_cart' or settings.product_cart_type == 'without_ajax_cart' %}
+  <button type="submit" class="" id="AddToCart">
+    <span>
+      <span class="cart-title cart" id="AddToCartText">{{ settings.cart_button_title }}</span>
+    </span>
+  </button>
+  {% endif %}
+  {% unless settings.product_cart_type == 'without_ajax_cart' %}
+  <script>
+    jQuery('#AddToCart').click(function(e) {
+      e.preventDefault();
+      Shopify.addItemFromFormStart('AddToCartForm', {{ product.id }});
+                                   }); 
+  </script>
+  {% endunless %}
+  {% else %}
+  <button class="cart-disable">
+    <span class="cart-text cart"><span>{{ settings.soldout_button_title }}</span></span>
+  </button>
+  {% endif %}
+  
+  {%- render 'wishlist-button-3' with product as product -%}
+  
+</div>

@@ -1,0 +1,44 @@
+{%- assign related_product_limit_count = section.settings.related_product_limit_handle -%}
+{%- assign related_product_limit = related_product_limit_count | plus: 1 -%}
+
+{%- if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' -%}
+{%- assign found_a_collection = false -%}
+{%- for c in product.collections -%}
+
+{%- if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 -%}
+{%- assign found_a_collection = true -%}
+{%- assign collection = c -%}
+{%- endif -%}
+
+{%- endfor -%}
+{%- endif -%}
+
+{%- capture data_slick_activation -%}
+      data-slick='{
+           "slidesToShow": {{ section.settings.product_column }},
+            "responsive":[
+                {"breakpoint":992, "settings": {"slidesToShow": {{ section.settings.product_column_md }}} },
+                {"breakpoint":768, "settings": {"slidesToShow": {{ section.settings.product_column_sm }}} },
+                {"breakpoint":480, "settings": {"slidesToShow": {{ section.settings.product_column_sm }}, "arrows": false} }
+              ] 
+
+      }'
+      {%- endcapture -%}
+
+{% if collection and collection.products_count > 1 %}
+<div class="row">
+  {% if section.settings.section_title != '' %}
+  <div class="section-title center section mb-40 mb-xs-30">
+    <h1>{{ section.settings.section_title }}</h1>
+  </div>
+  {% endif %}
+  <div class="product-slider product-slider-3 section" {% if settings.rtl_enable %}dir="rtl"{% endif %} {{ data_slick_activation }}>
+
+    {%- for product in recommendations.products -%}
+    <div class="col">
+      {% include 'product-grid-item' %}
+    </div>   
+    {% endfor %}
+  </div>
+</div><!-- Product Slider 4 Column Start-->
+{% endif %}

@@ -1,0 +1,51 @@
+<div class="instagram-feed" id="section-{{ section.id }}" data-section-type="instafeed-section" data-section-id="{{ section.id }}">
+  <div class="container">
+    <!-- Section Title Start -->
+    {%- if section.settings.section_title != '' or section.settings.section_brief != '' -%}
+    <div class="row">
+      <div class="col">
+        {% assign text_alignment = section.settings.section_title_alignment %}
+        <div class="section-title center mb-60 mb-xs-40 {% if section.settings.section_title_border == true %} section-title-border {% endif %} {% if text_alignment == 'content_left' %}text-left 
+                    {% elsif text_alignment == 'content_right' %}text-right {% else %}text-center{% endif %}">
+          {%- if section.settings.section_title != '' -%}
+          <h1>{{ section.settings.section_title }}</h1>
+          {%- endif -%}
+
+          {%- if section.settings.section_brief != '' -%}
+          <p>{{ section.settings.section_brief }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div><!-- Section Title End -->
+    {%- endif -%}
+
+    <div class="row">
+      <div class="col-12">
+        <div id="instafeed"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function ($) {
+    "use strict";
+
+    jQuery(document).ready(function(){
+
+      var userFeed = new Instafeed({
+        get: 'user',
+        userId: '{{ section.settings.instafeed_user_id }}',
+        limit: '{{ section.settings.instafeed_limit }}',
+        accessToken: '{{ section.settings.instafeed_access_token }}',
+        resolution: '{{ section.settings.image_resolution }}',
+        template: '<a href="\{\{link\}\}"><img src="\{\{image\}\}"></a>'
+      });
+      userFeed.run();
+    });
+
+  })(jQuery); 
+</script>
+
+<script src="{{ 'instafeed.min.js' | asset_url }}"></script>

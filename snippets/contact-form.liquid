@@ -1,0 +1,31 @@
+{% form 'contact' %}
+<div class="row row-10">
+
+  <div class="col-md-12 col-12 mb-30">
+    {% if form.posted_successfully? %}
+    <p class="note form-success">{{ 'contact.form.post_success' | t }}</p>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+  </div>
+
+  <div class="col-md-6 col-12 mb-30">
+    <input type="text" placeholder="{{ section.settings.name_placeholder }}" class="{% if form.errors contains 'email' %}error{% endif %}" class="{% if form.errors contains 'name' %}error{% endif %}" name="contact[name]" id="ContactFormName" value="{% if form.name %}{{ form.name }}{% elsif customer.name %}{{ customer.name }}{% endif %}">
+  </div>
+  <div class="col-md-6 col-12 mb-30">
+    <input type="email" placeholder="{{ section.settings.email_placeholder }}" class="{% if form.errors contains 'email' %}error{% endif %}" name="contact[email]" id="ContactFormEmail" value="{% if form.email %}{{ form.email }}{% elsif customer.email %}{{ customer.email }}{% endif %}">
+  </div>
+  <div class="col-md-6 col-12 mb-30">
+    <input type="text" placeholder="{{ section.settings.number_placeholder }}" class="{% if form.errors contains 'number' %}error{% endif %}" name="contact[number]" id="ContactFormNumber">
+  </div>
+  <div class="col-md-6 col-12 mb-30">
+    <input type="text" placeholder="{{ section.settings.subject_placeholder }}" class="{% if form.errors contains 'subject' %}error{% endif %}" name="contact[subject]" id="ContactFormSubject">
+  </div>
+  <div class="col-12 mb-30">
+    <textarea placeholder="{{ section.settings.message_placeholder }}" name="contact[body]" id="ContactFormMessage">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+  </div>
+  <div class="col-12">
+    <button type="submit">{{ section.settings.form_button_name }}</button>
+  </div>
+</div>
+{% endform %}

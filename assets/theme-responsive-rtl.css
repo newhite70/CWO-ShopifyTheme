@@ -1,0 +1,19 @@
+@media (max-width: 767px) {
+
+  .user-dropdown {
+    right: 0;
+    left: auto;
+  }
+  .switcher-dropdown {
+    right: 0;
+    left: auto;
+  }
+  .user-dropdown {
+    width: 180px;
+  }
+  .header-mini-cart {
+    left: -60px;
+    right: auto;
+  }
+  
+}
