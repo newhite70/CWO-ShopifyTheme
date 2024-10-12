@@ -1,1 +1,681 @@
-{"sections":{"1538889093339":{"type":"slider","blocks":{"1538889093339-0":{"type":"slider","settings":{"slide_bg_image":"shopify:\/\/shop_images\/slider-bg-1-1.jpg","slider_alignment":"content_right","slider_text_alignment":"text_center","slider_thumb_image_enable":true,"slide_thumb_image":"shopify:\/\/shop_images\/slider-product-1_large_c9e8b9e3-036d-4b35-a921-3abdd3aaef72.png","thumb_image_shape_color":"#07131f","slider_content_enable":true,"slide_sub_title":"BEARD OIL","slide_title":"FOR GLOSSY AND <br>STYLISH BEARD","slide_button_title":"SHOP NOW","slide_button_url":"shopify:\/\/collections","hero_content_2_title_color":"#c4c4c4","hero_content_1_title_color":"#c4c4c4","hero_content_btn_color":"#222222","hero_content_btn_bg_color":"#d0a97e","hero_content_btn_border_color":"#d0a97e","hero_content_btn_border_radius":50,"hero_content_btn_hover_color":"#d0a97e","hero_content_btn_hover_bg_color":"#222222","hero_content_btn_hover_border_color":"#222222"}},"1538889093339-1":{"type":"slider","settings":{"slide_bg_image":"shopify:\/\/shop_images\/slider-bg-2_962a27ed-45df-47ef-a46b-4004b06452cc.jpg","slider_alignment":"content_right","slider_text_alignment":"text_center","slider_thumb_image_enable":true,"slide_thumb_image":"shopify:\/\/shop_images\/slider-product-1_large_c9e8b9e3-036d-4b35-a921-3abdd3aaef72.png","thumb_image_shape_color":"rgba(0,0,0,0)","slider_content_enable":true,"slide_sub_title":"BEARD OIL","slide_title":"FOR GLOSSY AND <br>STYLISH BEARD","slide_button_title":"SHOP NOW","slide_button_url":"shopify:\/\/collections","hero_content_2_title_color":"#c4c4c4","hero_content_1_title_color":"#c4c4c4","hero_content_btn_color":"#222222","hero_content_btn_bg_color":"#d0a97e","hero_content_btn_border_color":"#d0a97e","hero_content_btn_border_radius":50,"hero_content_btn_hover_color":"#d0a97e","hero_content_btn_hover_bg_color":"#222222","hero_content_btn_hover_border_color":"#222222"}},"1538891385729":{"type":"section_padding","settings":{"section_padding_top":0,"section_padding_bottom":0,"section_padding_top_xs":0,"section_padding_bottom_xs":0}}},"block_order":["1538889093339-0","1538889093339-1","1538891385729"],"settings":{"hero_slider_arrow_color":"#d0a97e","hero_slider_arrow_bg_color":"#222222","hero_slider_arrow_hover_color":"#222222","hero_slider_arrow_hover_bg_color":"#d0a97e","snow_enable":false}},"1538901393336":{"type":"about-info","blocks":{"1538902937896":{"type":"section_background","settings":{"section_bg_color":"rgba(0,0,0,0)"}},"1539057706096":{"type":"section_padding","settings":{"section_padding_top":90,"section_padding_bottom":60,"section_padding_top_xs":0,"section_padding_bottom_xs":20}},"1539861808719":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":0,"section_margin_top_xs":50,"section_margin_bottom_xs":0}}},"block_order":["1538902937896","1539057706096","1539861808719"],"settings":{"about_info_area_enable":true,"about_info_sub_title":"Provide the best","about_info_title":"Beard Oil For You","about_info_description":"<p>We provide the best Beard oil all over the world. We are the worldd best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...<\/p><p><\/p><p>Some of our customer say’s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.<\/p>","about_info_button_text":"Read More","about_info_button_url":"shopify:\/\/pages\/about","about_info_image":"shopify:\/\/shop_images\/about-1_large_e38f7554-12a8-4cfc-90e4-517cd9bd35f6.jpg","about_info_image_enable":true,"about_info_image_shape_enable":true,"about_info_shape_1":"shopify:\/\/shop_images\/about-shape-1_large_b3acf735-99f0-4a19-ba5e-b53b31fed55b.png","about_info_shape_1_enable":true,"about_info_shape_2":"shopify:\/\/shop_images\/about-shape-2_large_eca3281f-6007-406a-b1d2-a5bfc574526b.png","about_info_shape_2_enable":true,"about_info_sub_title_color":"","about_info_title_color":"","about_info_description_color":"","about_info_button_text_color":"","about_info_button_text_bg_color":"","about_info_button_text_border_color":"","about_info_button_border_radius":50,"about_info_button_hover_text_color":"","about_info_button_hover_text_bg_color":"","about_info_button_hover_text_border_color":"","about_info_image_shape_color":""}},"1538994092911":{"type":"featured-product-slider","blocks":{"1539060821890":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":90,"section_margin_top_xs":0,"section_margin_bottom_xs":50}}},"block_order":["1539060821890"],"settings":{"section_title":"New Arrivals","section_brief":"Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product.","section_title_border":false,"section_title_alignment":"content_center","section_title_color":"","section_brief_color":"","featured_product_handle":"new-arrival","product_column":4,"product_column_md":3,"product_column_sm":2,"featured_product_limit_handle":"10"}},"1538910067176":{"type":"banner","blocks":{"1538911989598":{"type":"banner","settings":{"banner_column":5,"banner_image_1":"shopify:\/\/shop_images\/banner-1.jpg","banner_image_1_url":""}},"1538911994936":{"type":"banner","settings":{"banner_column":7,"banner_image_1":"shopify:\/\/shop_images\/banner-2.jpg","banner_image_1_url":""}},"1539061940971":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":80,"section_margin_top_xs":0,"section_margin_bottom_xs":0}}},"block_order":["1538911989598","1538911994936","1539061940971"],"settings":{"banner_area_enable":true,"small_row_space":true,"snow_enable":false}},"1538969228990":{"type":"subscribe","blocks":{"1538980418048":{"type":"section_background","settings":{"section_bg_color":"#222222"}},"1539061976317":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":90,"section_margin_top_xs":20,"section_margin_bottom_xs":50}},"1539524605339":{"type":"section_padding","settings":{"section_padding_top":80,"section_padding_bottom":80,"section_padding_top_xs":80,"section_padding_bottom_xs":80}}},"block_order":["1538980418048","1539061976317","1539524605339"],"settings":{"subscribe_area_enable":true,"full_width":true,"banner_product_enable":true,"banner_product_name":"Product Name","banner_product_brand":"Brand Name","banner_product_image":"shopify:\/\/shop_images\/subscribe-product-1_large_1.png","banner_product_url":"shopify:\/\/collections","banner_product_bg_image":"shopify:\/\/shop_images\/subscribe-bg-1_6aa3289f-bd3d-46cf-b6ab-ea29a7fbff67.jpg","banner_product_bg_image_enable":true,"subscribe_sub_title":"Special <span>Offers<\/span> for Subscription","subscribe_title":"GET INSTANT DISCOUNT FOR MEMBERSHIP","subscribe_brief":"Subscribe our newsletter and get all latest news abot our latest <br> products, promotions, offers and discount","email_placeholder":"Enter your email here","button_title":"Subscribe","subscribe_area_shape_1":"shopify:\/\/shop_images\/subscribe-shape-1.png","subscribe_area_shape_1_enable":true,"banner_product_name_color":"#ffffff","banner_product_brand_name_color":"#ffffff","subscribe_sub_title_color":"#ffffff","subscribe_sub_title_span_color":"#d0a97e","subscribe_title_color":"#ffffff","subscribe_brief_color":"#ffffff","subscribe_form_input_border_color":"#ffffff","subscribe_form_input_bg_color":"","subscribe_form_input_text_color":"#ffffff","subscribe_form_input_placeholder_color":"#ffffff","subscribe_form_input_border_radius":50,"subscribe_form_button_text_color":"#ffffff","subscribe_form_button_bg_color":"#d0a97e","subscribe_form_button_border_radius":50,"subscribe_form_button_hover_text_color":"#ffffff","subscribe_form_button_hover_bg_color":"#d0a97e","snow_enable":false}},"1538994012147":{"type":"featured-product","blocks":{"1539062206132":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":60,"section_margin_top_xs":0,"section_margin_bottom_xs":20}}},"block_order":["1539062206132"],"settings":{"section_title":"Popular Products","section_brief":"Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product.","section_title_border":false,"section_title_alignment":"content_center","section_title_color":"","section_brief_color":"","featured_product_handle":"featured-product","featured_product_limit_handle":"8","product_column":"3","product_column_md":"4","product_column_sm":"6"}},"1538997923031":{"type":"brand-logo","blocks":{"1538997940306":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-1.png"}},"1538998130106":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-2.png"}},"1539056077236":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-3.png"}},"1539056103814":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-4.png"}},"1539056108917":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-5.png"}},"1539056632702":{"type":"brand_logo","settings":{"banner_column":6,"brand_logo_image":"shopify:\/\/shop_images\/brand-4.png"}},"1539064663046":{"type":"section_margin","settings":{"section_margin_top":0,"section_margin_bottom":90,"section_margin_top_xs":0,"section_margin_bottom_xs":50}}},"block_order":["1538997940306","1538998130106","1539056077236","1539056103814","1539056108917","1539056632702","1539064663046"],"settings":{}},"about-info":{"type":"about-info","blocks":{"1539510207565":{"type":"section_margin","settings":{"section_margin_top":90,"section_margin_bottom":60,"section_margin_top_xs":50,"section_margin_bottom_xs":20}}},"block_order":["1539510207565"],"settings":{"about_info_area_enable":true,"about_info_sub_title":"Provide the best","about_info_title":"Beard Oil For You","about_info_description":"<p>We provide the best Beard oil all over the world. We are the worldd best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...<\/p><p>Some of our customer say’s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.<\/p>","about_info_button_text":"LEARN MORE","about_info_button_url":"","about_info_image":"shopify:\/\/shop_images\/about-1.jpg","about_info_image_enable":true,"about_info_image_shape_enable":true,"about_info_shape_1":"shopify:\/\/shop_images\/about-shape-2.png","about_info_shape_1_enable":true,"about_info_shape_2":"shopify:\/\/shop_images\/about-shape-1.png","about_info_shape_2_enable":true,"about_info_sub_title_color":"","about_info_title_color":"","about_info_description_color":"","about_info_button_text_color":"","about_info_button_text_bg_color":"","about_info_button_text_border_color":"","about_info_button_border_radius":50,"about_info_button_hover_text_color":"","about_info_button_hover_text_bg_color":"","about_info_button_hover_text_border_color":"","about_info_image_shape_color":""}}},"order":["1538889093339","1538901393336","1538994092911","1538910067176","1538969228990","1538994012147","1538997923031","about-info"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1538889093339": {
+      "type": "slider",
+      "blocks": {
+        "1538889093339-0": {
+          "type": "slider",
+          "settings": {
+            "slide_bg_image": "shopify:\/\/shop_images\/slider-bg-1-1.jpg",
+            "slider_alignment": "content_right",
+            "slider_text_alignment": "text_center",
+            "slider_thumb_image_enable": true,
+            "slide_thumb_image": "shopify:\/\/shop_images\/slider-product-1_large_c9e8b9e3-036d-4b35-a921-3abdd3aaef72.png",
+            "thumb_image_shape_color": "#07131f",
+            "slider_content_enable": true,
+            "slide_sub_title": "BEARD OIL",
+            "slide_title": "FOR GLOSSY AND <br>STYLISH BEARD",
+            "slide_button_title": "SHOP NOW",
+            "slide_button_url": "shopify:\/\/collections",
+            "hero_content_2_title_color": "#c4c4c4",
+            "hero_content_1_title_color": "#c4c4c4",
+            "hero_content_btn_color": "#222222",
+            "hero_content_btn_bg_color": "#d0a97e",
+            "hero_content_btn_border_color": "#d0a97e",
+            "hero_content_btn_border_radius": 50,
+            "hero_content_btn_hover_color": "#d0a97e",
+            "hero_content_btn_hover_bg_color": "#222222",
+            "hero_content_btn_hover_border_color": "#222222"
+          }
+        },
+        "1538889093339-1": {
+          "type": "slider",
+          "settings": {
+            "slide_bg_image": "shopify:\/\/shop_images\/slider-bg-2_962a27ed-45df-47ef-a46b-4004b06452cc.jpg",
+            "slider_alignment": "content_right",
+            "slider_text_alignment": "text_center",
+            "slider_thumb_image_enable": true,
+            "slide_thumb_image": "shopify:\/\/shop_images\/slider-product-1_large_c9e8b9e3-036d-4b35-a921-3abdd3aaef72.png",
+            "thumb_image_shape_color": "rgba(0,0,0,0)",
+            "slider_content_enable": true,
+            "slide_sub_title": "BEARD OIL",
+            "slide_title": "FOR GLOSSY AND <br>STYLISH BEARD",
+            "slide_button_title": "SHOP NOW",
+            "slide_button_url": "shopify:\/\/collections",
+            "hero_content_2_title_color": "#c4c4c4",
+            "hero_content_1_title_color": "#c4c4c4",
+            "hero_content_btn_color": "#222222",
+            "hero_content_btn_bg_color": "#d0a97e",
+            "hero_content_btn_border_color": "#d0a97e",
+            "hero_content_btn_border_radius": 50,
+            "hero_content_btn_hover_color": "#d0a97e",
+            "hero_content_btn_hover_bg_color": "#222222",
+            "hero_content_btn_hover_border_color": "#222222"
+          }
+        },
+        "1538891385729": {
+          "type": "section_padding",
+          "settings": {
+            "section_padding_top": 0,
+            "section_padding_bottom": 0,
+            "section_padding_top_xs": 0,
+            "section_padding_bottom_xs": 0
+          }
+        }
+      },
+      "block_order": [
+        "1538889093339-0",
+        "1538889093339-1",
+        "1538891385729"
+      ],
+      "settings": {
+        "hero_slider_arrow_color": "#d0a97e",
+        "hero_slider_arrow_bg_color": "#222222",
+        "hero_slider_arrow_hover_color": "#222222",
+        "hero_slider_arrow_hover_bg_color": "#d0a97e",
+        "snow_enable": false
+      }
+    },
+    "1538901393336": {
+      "type": "about-info",
+      "blocks": {
+        "1538902937896": {
+          "type": "section_background",
+          "settings": {
+            "section_bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "1539057706096": {
+          "type": "section_padding",
+          "settings": {
+            "section_padding_top": 90,
+            "section_padding_bottom": 60,
+            "section_padding_top_xs": 0,
+            "section_padding_bottom_xs": 20
+          }
+        },
+        "1539861808719": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 0,
+            "section_margin_top_xs": 50,
+            "section_margin_bottom_xs": 0
+          }
+        }
+      },
+      "block_order": [
+        "1538902937896",
+        "1539057706096",
+        "1539861808719"
+      ],
+      "settings": {
+        "about_info_area_enable": true,
+        "about_info_sub_title": "Provide the best",
+        "about_info_title": "Beard Oil For You",
+        "about_info_description": "<p>We provide the best Beard oil all over the world. We are the worldd best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...<\/p><p><\/p><p>Some of our customer say’s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.<\/p>",
+        "about_info_button_text": "Read More",
+        "about_info_button_url": "shopify:\/\/pages\/about",
+        "about_info_image": "shopify:\/\/shop_images\/about-1_large_e38f7554-12a8-4cfc-90e4-517cd9bd35f6.jpg",
+        "about_info_image_enable": true,
+        "about_info_image_shape_enable": true,
+        "about_info_shape_1": "shopify:\/\/shop_images\/about-shape-1_large_b3acf735-99f0-4a19-ba5e-b53b31fed55b.png",
+        "about_info_shape_1_enable": true,
+        "about_info_shape_2": "shopify:\/\/shop_images\/about-shape-2_large_eca3281f-6007-406a-b1d2-a5bfc574526b.png",
+        "about_info_shape_2_enable": true,
+        "about_info_sub_title_color": "",
+        "about_info_title_color": "",
+        "about_info_description_color": "",
+        "about_info_button_text_color": "",
+        "about_info_button_text_bg_color": "",
+        "about_info_button_text_border_color": "",
+        "about_info_button_border_radius": 50,
+        "about_info_button_hover_text_color": "",
+        "about_info_button_hover_text_bg_color": "",
+        "about_info_button_hover_text_border_color": "",
+        "about_info_image_shape_color": ""
+      }
+    },
+    "1538994092911": {
+      "type": "featured-product-slider",
+      "blocks": {
+        "1539060821890": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1539060821890"
+      ],
+      "settings": {
+        "section_title": "New Arrivals",
+        "section_brief": "Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product.",
+        "section_title_border": false,
+        "section_title_alignment": "content_center",
+        "section_title_color": "",
+        "section_brief_color": "",
+        "featured_product_handle": "new-arrival",
+        "product_column": 4,
+        "product_column_md": 3,
+        "product_column_sm": 2,
+        "featured_product_limit_handle": "10"
+      }
+    },
+    "1538910067176": {
+      "type": "banner",
+      "blocks": {
+        "1538911989598": {
+          "type": "banner",
+          "settings": {
+            "banner_column": 5,
+            "banner_image_1": "shopify:\/\/shop_images\/banner-1.jpg",
+            "banner_image_1_url": ""
+          }
+        },
+        "1538911994936": {
+          "type": "banner",
+          "settings": {
+            "banner_column": 7,
+            "banner_image_1": "shopify:\/\/shop_images\/banner-2.jpg",
+            "banner_image_1_url": ""
+          }
+        },
+        "1539061940971": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 80,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 0
+          }
+        }
+      },
+      "block_order": [
+        "1538911989598",
+        "1538911994936",
+        "1539061940971"
+      ],
+      "settings": {
+        "banner_area_enable": true,
+        "small_row_space": true,
+        "snow_enable": false
+      }
+    },
+    "1538969228990": {
+      "type": "subscribe",
+      "blocks": {
+        "1538980418048": {
+          "type": "section_background",
+          "settings": {
+            "section_bg_color": "#222222"
+          }
+        },
+        "1539061976317": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 20,
+            "section_margin_bottom_xs": 50
+          }
+        },
+        "1539524605339": {
+          "type": "section_padding",
+          "settings": {
+            "section_padding_top": 80,
+            "section_padding_bottom": 80,
+            "section_padding_top_xs": 80,
+            "section_padding_bottom_xs": 80
+          }
+        }
+      },
+      "block_order": [
+        "1538980418048",
+        "1539061976317",
+        "1539524605339"
+      ],
+      "settings": {
+        "subscribe_area_enable": true,
+        "full_width": true,
+        "banner_product_enable": true,
+        "banner_product_name": "Product Name",
+        "banner_product_brand": "Brand Name",
+        "banner_product_image": "shopify:\/\/shop_images\/subscribe-product-1_large_1.png",
+        "banner_product_url": "shopify:\/\/collections",
+        "banner_product_bg_image": "shopify:\/\/shop_images\/subscribe-bg-1_6aa3289f-bd3d-46cf-b6ab-ea29a7fbff67.jpg",
+        "banner_product_bg_image_enable": true,
+        "subscribe_sub_title": "Special <span>Offers<\/span> for Subscription",
+        "subscribe_title": "GET INSTANT DISCOUNT FOR MEMBERSHIP",
+        "subscribe_brief": "Subscribe our newsletter and get all latest news abot our latest <br> products, promotions, offers and discount",
+        "email_placeholder": "Enter your email here",
+        "button_title": "Subscribe",
+        "subscribe_area_shape_1": "shopify:\/\/shop_images\/subscribe-shape-1.png",
+        "subscribe_area_shape_1_enable": true,
+        "banner_product_name_color": "#ffffff",
+        "banner_product_brand_name_color": "#ffffff",
+        "subscribe_sub_title_color": "#ffffff",
+        "subscribe_sub_title_span_color": "#d0a97e",
+        "subscribe_title_color": "#ffffff",
+        "subscribe_brief_color": "#ffffff",
+        "subscribe_form_input_border_color": "#ffffff",
+        "subscribe_form_input_bg_color": "",
+        "subscribe_form_input_text_color": "#ffffff",
+        "subscribe_form_input_placeholder_color": "#ffffff",
+        "subscribe_form_input_border_radius": 50,
+        "subscribe_form_button_text_color": "#ffffff",
+        "subscribe_form_button_bg_color": "#d0a97e",
+        "subscribe_form_button_border_radius": 50,
+        "subscribe_form_button_hover_text_color": "#ffffff",
+        "subscribe_form_button_hover_bg_color": "#d0a97e",
+        "snow_enable": false
+      }
+    },
+    "1538994012147": {
+      "type": "featured-product",
+      "blocks": {
+        "1539062206132": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 60,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 20
+          }
+        }
+      },
+      "block_order": [
+        "1539062206132"
+      ],
+      "settings": {
+        "section_title": "Popular Products",
+        "section_brief": "Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product.",
+        "section_title_border": false,
+        "section_title_alignment": "content_center",
+        "section_title_color": "",
+        "section_brief_color": "",
+        "featured_product_handle": "featured-product",
+        "featured_product_limit_handle": "8",
+        "product_column": "3",
+        "product_column_md": "4",
+        "product_column_sm": "6"
+      }
+    },
+    "1538997923031": {
+      "type": "brand-logo",
+      "blocks": {
+        "1538997940306": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-1.png"
+          }
+        },
+        "1538998130106": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-2.png"
+          }
+        },
+        "1539056077236": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-3.png"
+          }
+        },
+        "1539056103814": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-4.png"
+          }
+        },
+        "1539056108917": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-5.png"
+          }
+        },
+        "1539056632702": {
+          "type": "brand_logo",
+          "settings": {
+            "banner_column": 6,
+            "brand_logo_image": "shopify:\/\/shop_images\/brand-4.png"
+          }
+        },
+        "1539064663046": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1538997940306",
+        "1538998130106",
+        "1539056077236",
+        "1539056103814",
+        "1539056108917",
+        "1539056632702",
+        "1539064663046"
+      ],
+      "settings": {
+      }
+    },
+    "1539162772200": {
+      "type": "about-info-2",
+      "disabled": true,
+      "blocks": {
+        "1539579201421": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1539579201421"
+      ],
+      "settings": {
+        "about_info_2_area_enable": true,
+        "about_info_2_image_1": "shopify:\/\/shop_images\/about-2.jpg",
+        "about_info_2_image_1_enable": true,
+        "about_info_2_image_2": "shopify:\/\/shop_images\/about-3.jpg",
+        "about_info_2_image_2_enable": true,
+        "about_info_sub_title": "Provide the best",
+        "about_info_title": "Beard Oil For You",
+        "about_info_description": "<p>We provide the best Beard oil all over the world. We are the worldd best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...<\/p><p>Some of our customer say’s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.<\/p>",
+        "about_info_button_text": "Read More",
+        "about_info_button_url": "#",
+        "about_info_image_shape_2_enable": true,
+        "about_info_shape_2": "shopify:\/\/shop_images\/subscribe-shape-1.png",
+        "about_info_sub_title_color": "",
+        "about_info_title_color": "",
+        "about_info_description_color": "",
+        "about_info_button_text_color": "",
+        "about_info_button_text_bg_color": "",
+        "about_info_button_text_border_color": "",
+        "about_info_button_border_radius": 50,
+        "about_info_button_hover_text_color": "",
+        "about_info_button_hover_text_bg_color": "",
+        "about_info_button_hover_text_border_color": "",
+        "about_info_image_shape_color": ""
+      }
+    },
+    "1539174326053": {
+      "type": "testimonial",
+      "disabled": true,
+      "blocks": {
+        "1539174326053-0": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_client_image": "shopify:\/\/shop_images\/testimonial-1.jpg",
+            "testimonial_client_review": "We provide the best Beard oil all over the worl. We are the world best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...",
+            "testimonial_client_name": "William Benjamin",
+            "testimonial_client_designation": "ami neta"
+          }
+        },
+        "1539174326053-1": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_client_image": "shopify:\/\/shop_images\/testimonial-2.jpg",
+            "testimonial_client_review": "We provide the best Beard oil all over the worl. We are the world best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...",
+            "testimonial_client_name": "Ethan Alexander",
+            "testimonial_client_designation": "ami neta"
+          }
+        },
+        "1539228961967": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_client_review": "We provide the best Beard oil all over the world. We are the world best store for Beard Oil. You can buy our product without any hesitation because we always conscious about our product quality and always maintain it properly, so you can trust and this is our main goal we believe that...",
+            "testimonial_client_name": "Jacob Elijah",
+            "testimonial_client_designation": "Designation"
+          }
+        },
+        "1539579222314": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1539174326053-0",
+        "1539174326053-1",
+        "1539228961967",
+        "1539579222314"
+      ],
+      "settings": {
+        "testimonial_area_enable": true,
+        "testimonial_title": "Section Title",
+        "section_title_color": "",
+        "section_title_border_color": "",
+        "testimonial_image_bg_color": "",
+        "testimonial_client_pragraph_color": "",
+        "testimonial_client_name_color": "",
+        "testimonial_client_designation_color": ""
+      }
+    },
+    "1539230201292": {
+      "type": "latest-blog",
+      "disabled": true,
+      "blocks": {
+        "1539579424478": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": 90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1539579424478"
+      ],
+      "settings": {
+        "blog_area_title": "Latest Blog Post",
+        "blog_area_brief": "Some of our customer say’s that they trust us and buy our product without any gitation because they can belive us",
+        "blog_handle": "news",
+        "blog_limit_handle": "6",
+        "article_brief_enable": true,
+        "blog_content_count_handle": 135,
+        "latest_blog_button": "Read More",
+        "latest_blog_section_title_area_bg_color": "",
+        "latest_blog_section_title_color": "",
+        "latest_blog_section_brief_color": "",
+        "home_blog_item_bg_color": "",
+        "home_blog_item_title_color": "",
+        "home_blog_item_title_hover_color": "",
+        "home_blog_item_meta_color": "",
+        "home_blog_item_meta_hover_color": "",
+        "home_blog_item_brief_color": "",
+        "home_blog_item_read_more_btn_color": "",
+        "home_blog_item_read_more_btn_hover_color": "",
+        "latest_blog_slider_arrow_bg_color": "",
+        "latest_blog_slider_arrow_color": "",
+        "latest_blog_slider_arrow_hover_bg_color": "",
+        "latest_blog_slider_arrow_hover_color": ""
+      }
+    },
+    "about-info": {
+      "type": "about-info",
+      "blocks": {
+        "1539510207565": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 90,
+            "section_margin_bottom": 60,
+            "section_margin_top_xs": 50,
+            "section_margin_bottom_xs": 20
+          }
+        }
+      },
+      "block_order": [
+        "1539510207565"
+      ],
+      "settings": {
+        "about_info_area_enable": true,
+        "about_info_sub_title": "Provide the best",
+        "about_info_title": "Beard Oil For You",
+        "about_info_description": "<p>We provide the best Beard oil all over the world. We are the worldd best store for Beard Oil. You can buy our product without any hegitation because we always consus about our product quality and always maintain it properly so your can trust and this is our main goal we belive that...<\/p>\n<p>Some of our customer say&rsquo;s that they trust us and buy our product without any hagitation because they belive us and always happy to buy our product.<\/p>",
+        "about_info_button_text": "LEARN MORE",
+        "about_info_button_url": "",
+        "about_info_image": "shopify:\/\/shop_images\/about-1.jpg",
+        "about_info_image_enable": true,
+        "about_info_image_shape_enable": true,
+        "about_info_shape_1": "shopify:\/\/shop_images\/about-shape-2.png",
+        "about_info_shape_1_enable": true,
+        "about_info_shape_2": "shopify:\/\/shop_images\/about-shape-1.png",
+        "about_info_shape_2_enable": true,
+        "about_info_sub_title_color": "",
+        "about_info_title_color": "",
+        "about_info_description_color": "",
+        "about_info_button_text_color": "",
+        "about_info_button_text_bg_color": "",
+        "about_info_button_text_border_color": "",
+        "about_info_button_border_radius": 50,
+        "about_info_button_hover_text_color": "",
+        "about_info_button_hover_text_bg_color": "",
+        "about_info_button_hover_text_border_color": "",
+        "about_info_image_shape_color": ""
+      }
+    },
+    "about-info-2": {
+      "type": "about-info-2",
+      "settings": {
+        "about_info_2_area_enable": false,
+        "about_info_2_image_1_enable": true,
+        "about_info_2_image_2_enable": true,
+        "about_info_sub_title": "Sub Title",
+        "about_info_title": "Title",
+        "about_info_description": "<p>Description here<\/p>",
+        "about_info_button_text": "Read More",
+        "about_info_button_url": "",
+        "about_info_image_shape_2_enable": true,
+        "about_info_sub_title_color": "",
+        "about_info_title_color": "",
+        "about_info_description_color": "",
+        "about_info_button_text_color": "",
+        "about_info_button_text_bg_color": "",
+        "about_info_button_text_border_color": "",
+        "about_info_button_border_radius": 50,
+        "about_info_button_hover_text_color": "",
+        "about_info_button_hover_text_bg_color": "",
+        "about_info_button_hover_text_border_color": "",
+        "about_info_image_shape_color": ""
+      }
+    },
+    "service": {
+      "type": "service",
+      "disabled": true,
+      "blocks": {
+        "1539418433751": {
+          "type": "service",
+          "settings": {
+            "service_column": 3,
+            "service_icon_image": "shopify:\/\/shop_images\/service-sprites.png",
+            "service_icon_image_enable": true,
+            "service_title": "Free home delivery",
+            "service_brief": "Provide free home delivery for all product over $100"
+          }
+        },
+        "1539418436846": {
+          "type": "service",
+          "settings": {
+            "service_column": 3,
+            "service_icon_image": "shopify:\/\/shop_images\/service-sprites.png",
+            "service_icon_image_enable": true,
+            "service_title": "Quality Products",
+            "service_brief": "We ensure the product quality that is our main goal"
+          }
+        },
+        "1539418439831": {
+          "type": "service",
+          "settings": {
+            "service_column": 3,
+            "service_icon_image": "shopify:\/\/shop_images\/service-sprites.png",
+            "service_icon_image_enable": true,
+            "service_title": "3 Days Return",
+            "service_brief": "Return product within 3 days for any product you buy"
+          }
+        },
+        "1539418442175": {
+          "type": "service",
+          "settings": {
+            "service_column": 3,
+            "service_icon_image": "shopify:\/\/shop_images\/service-sprites.png",
+            "service_icon_image_enable": true,
+            "service_title": "Online Support",
+            "service_brief": "We ensure the product quality that you can trust easily"
+          }
+        },
+        "1539418542596": {
+          "type": "section_margin",
+          "settings": {
+            "section_margin_top": 0,
+            "section_margin_bottom": -90,
+            "section_margin_top_xs": 0,
+            "section_margin_bottom_xs": 50
+          }
+        }
+      },
+      "block_order": [
+        "1539418433751",
+        "1539418436846",
+        "1539418439831",
+        "1539418442175",
+        "1539418542596"
+      ],
+      "settings": {
+        "footer_service_area_enable": true,
+        "service_container_bg_color": "",
+        "service_container_border_color": "",
+        "service_container_border_radius": 100,
+        "service_title_color": "",
+        "service_brief_color": "",
+        "service_separator_border_color": ""
+      }
+    }
+  },
+  "order": [
+    "1538889093339",
+    "1538901393336",
+    "1538994092911",
+    "1538910067176",
+    "1538969228990",
+    "1538994012147",
+    "1538997923031",
+    "1539162772200",
+    "1539174326053",
+    "1539230201292",
+    "about-info",
+    "about-info-2",
+    "service"
+  ]
+}
